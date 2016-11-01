@@ -4,26 +4,41 @@ class AbstractInformation(object):
 
 
 class Author(object):
-    """an author object"""
+    """an author class"""
 
     name = 'author'
 
-    @classmethod
-    def parse_html(cls, soup):
+    @staticmethod
+    def parse_html(soup):
         selector = soup.find(property="article:author")
 
         if selector:
             return selector['content']
 
 class Title(object):
-    """an author object"""
+    """a title class"""
 
     name = 'title'
 
-    @classmethod
-    def parse_html(cls, soup):
+    @staticmethod
+    def parse_html(soup):
         selector = soup.find('title')
 
         if selector:
-            return selector
+            return selector.string
+
+class Poem(object):
+    """a poem class"""
+
+    name = 'poem'
+
+
+"""NOTE TO SELF: IS THIS WORKING??"""
+
+    @staticmethod
+    def parse_html(soup):
+        selector = soup.find('div', class_="poem")
+
+        if selector:
+            return selector.text
 
