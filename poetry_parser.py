@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-import model
+import objects
 
-objects = [model.Author, model.Title]
+objects = [objects.Author, objects.Title]
 
 raw_poems = ['raw_poems/89000.html']
 
@@ -13,13 +13,11 @@ for f in raw_poems:
 
     for o in objects:
 
-        if type(o.selector) == dict:
-            selector = soup.find(**o.selector)
-        elif type(o.selector) == str:
-            selector = soup.find(o.selector)
+        data = o.parse_html(soup)
+         
+        if data:
+            print 'success!', o.name, data
 
-        if selector:
-            o.data = selector
         else:
             e = open('err', 'a')
             e.write('No ' + o.name + ' found in ' + f + '\n')
