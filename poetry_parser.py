@@ -1,22 +1,25 @@
 from bs4 import BeautifulSoup
 import objects
+import os
 
-objects = [objects.Author, objects.Title, objects.Poem, objects.AuthorRegion]
+objects = [objects.Author, objects.Title, objects.Poem, objects.AuthorRegion, objects.PoemSubjects, objects.AuthorSchool, objects.PoeticTerms]
 
-raw_poems = ['raw_poems/89000.html']
+raw_poems = os.listdir('raw_poems/')
 
 
 for f in raw_poems:
-    text = open(f)
+    text = open('raw_poems/' + f)
 
-    soup = BeautifulSoup(text)
+    soup = BeautifulSoup(text, 'html.parser')
 
     for o in objects:
 
         data = o.parse_html(soup)
          
         if data:
-            print 'success!', o.name, data
+            d = open('data', 'a')
+            d.write(o.name + ': ' + data.encode('utf-8') + '\n')
+            d.close()
 
         else:
             e = open('err', 'a')

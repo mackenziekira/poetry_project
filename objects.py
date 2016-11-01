@@ -49,18 +49,48 @@ class AuthorRegion(object):
 
     name = 'author_region'
 
-
-    """NOTE TO SELF: IS THIS WORKING??"""
-
     @staticmethod
     def parse_html(soup):
         selector = soup.find('a', href=re.compile(r"poets#geography"))
-        print selector.text
-
-        # selector = soup.find(text="Poet's Region").parent.parent.parent
-        # print selector.text
-
 
         if selector:
             return selector.text
+
+class AuthorSchool(object):
+    """a author's school/period"""
+
+    name = 'author_school'
+
+    @staticmethod
+    def parse_html(soup):
+        selector = soup.find('a', href=re.compile(r"poets#school-period"))
+
+        if selector:
+            return selector.text
+
+class PoeticTerms(object):
+    """a poem's poetic terms"""
+
+    name = 'poetic_terms'
+
+    @staticmethod
+    def parse_html(soup):
+        selector = soup.find('a', href=re.compile(r"poets#poetic-terms"))
+
+        if selector:
+            return selector.text
+
+class PoemSubjects(object):
+    """a poem's subjects"""
+
+    name = 'poem_subjects'
+
+    @staticmethod
+    def parse_html(soup):
+        selector = soup.find('a', href=re.compile(r"poems#subjects"))
+
+        if selector:
+            return selector.text
+
+
 
