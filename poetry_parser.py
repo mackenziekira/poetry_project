@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import objects
 
-objects = [objects.Author, objects.Title, objects.Poem]
+objects = [objects.Author, objects.Title, objects.Poem, objects.AuthorRegion]
 
 raw_poems = ['raw_poems/89000.html']
 
