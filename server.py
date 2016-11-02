@@ -1,4 +1,4 @@
-from flask import flask
+from flask import Flask
 from model import connect_to_db, db
 
 app = Flask(__name__)
