@@ -16,33 +16,30 @@ def log_err(category, associated_thing, value):
 
 def load_regions():
     """loads region names and codes"""
-    for k, v in Parse.regions.iteritems():
-        region = Region(region_code=k,
-                    region_name=v)
+    for r in Parse.regions:
+        region = Region(region_name=r)
         db.session.add(region)
         db.session.commit()
 
 def load_subjects():
     """loads subject names and codes"""
-    for k, v in Parse.subjects.iteritems():
-        subject = Subject(subject_code=k,
-                    subject_name=v)
+    for s in Parse.subjects:
+        subject = Subject(subject_name=s)
         db.session.add(subject)
         db.session.commit()
 
 def load_poeticterms():
     """loads poetic terms and codes"""
-    for term in Parse.poetic_terms:
-        term = PoeticTerm(term_name=term)
+    for t in Parse.poetic_terms:
+        term = PoeticTerm(term_name=t)
         db.session.add(term)
         db.session.commit()
 
 
 def load_affiliations():
     """loads affiliation names and codes"""
-    for k, v in Parse.affiliations.iteritems():
-        affiliation = Affiliation(affiliation_code=k,
-                            affiliation_name=v)
+    for a in Parse.affiliations:
+        affiliation = Affiliation(affiliation_name=a)
         db.session.add(affiliation)
         db.session.commit()
 
@@ -60,18 +57,18 @@ def load_author(soup):
     except NoResultFound:
 
         try:
-            region = Region.query.filter(Region.region_name == region).one().region_code
+            region = Region.query.filter(Region.region_name == region).one().region_id
         except NoResultFound:
             log_err('region', name.encode('unicode-escape'), region)
 
         try:
-            affiliation = Affiliation.query.filter(Affiliation.affiliation_name == affiliation).one().affiliation_code
+            affiliation = Affiliation.query.filter(Affiliation.affiliation_name == affiliation).one().affiliation_id
         except NoResultFound:
             log_err('affiliation', name.encode('unicode-escape'), affiliation)
 
         author = Author(name=name,
-                        region_code=region,
-                        affiliation_code=affiliation)
+                        region_id=region,
+                        affiliation_id=affiliation)
         db.session.add(author)
         db.session.commit()
     except MultipleResultsFound:

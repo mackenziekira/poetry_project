@@ -3,73 +3,11 @@ from bs4 import BeautifulSoup
 
 class Parse(object):
 
-    regions = {
-    "afr":"Africa",
-    "ase":"Asia, East",
-    "ass":"Asia, South",
-    "ast":"Asia, Southeast",
-    "aus":"Australia",
-    "can":"Canada",
-    "car":"Caribbean",
-    "ese":"Eastern Europe",
-    "eng":"England",
-    "fra":"France",
-    "ger":"Germany",
-    "gre":"Greece",
-    "ini":"Ireland & Northern Ireland",
-    "isr":"Israel",
-    "ita":"Italy",
-    "lam":"Latin America",
-    "mex":"Mexico",
-    "mie":"Middle East",
-    "pai":"Pacific Islands",
-    "pol":"Poland",
-    "rus":"Russia",
-    "sca":"Scandinavia",
-    "sco":"Scotland",
-    "spa":"Spain",
-    "usa":"U.S., Mid-Atlantic",
-    "usm":"U.S., Midwestern",
-    "use":"U.S., New England",
-    "usn":"U.S., Northwestern",
-    "uss":"U.S., Southern",
-    "ust":"U.S., Southwestern",
-    "usw":"U.S., Western",
-    "wal":"Wales",
-    }
+    regions = ['Africa','Asia, East','Asia, South','Asia, Southeast','Australia','Canada','Caribbean','Eastern Europe','England','France','Germany','Greece','Ireland & Northern Ireland','Israel','Italy','Latin America','Mexico','Middle East','Pacific Islands','Poland','Russia','Scandinavia','Scotland','Spain','U.S., Mid-Atlantic','U.S., Midwestern','U.S., New England','U.S., Northwestern','U.S., Southern','U.S., Southwestern','U.S., Western','Wales']
 
-    affiliations = {
-    "aug":"Augustan",
-    "bea":"Beat",
-    "bam":"Black Arts Movement",
-    "blm":"Black Mountain",
-    "con":"Confessional",
-    "fug":"Fugitive",
-    "geo":"Georgian",
-    "har":"Harlem Renaissance",
-    "ima":"Imagist",
-    "lan":"Language Poetry",
-    "mid":"Middle English",
-    "mod":"Modern",
-    "nys":"New York School",
-    "nyt":"New York School (2nd Generation)",
-    "obj":"Objectivist",
-    "ren":"Renaissance",
-    "rom":"Romantic",
-    "vic":"Victorian"
-    }
+    affiliations = ['Augustan','Beat','Black Arts Movement','Black Mountain','Confessional','Fugitive','Georgian','Harlem Renaissance','Imagist','Language Poetry','Middle English','Modern','New York School','New York School (2nd Generation)','Objectivist','Renaissance','Romantic','Victorian']
 
-    subjects = {
-    "lov":"Love",
-    "nat":"Nature",
-    "soc":"Social Commentaries",
-    "rel":"Religion",
-    "liv":"Living",
-    "res":"Relationships",
-    "act":"Activities",
-    "art":"Arts & Sciences",
-    "myt":"Mythology & Folklore"
-    }
+    subjects = ['Love','Nature','Social Commentaries','Religion','Living','Relationships','Activities','Arts & Sciences','Mythology & Folklore']
 
     poetic_terms = ['Ballad','Haiku','Limerick','Sestina','Sonnet','Villanelle','Pantoum','Ghazal','Couplet','Ottava Rima','Terza Rima','Rhymed Stanza','Mixed','Tercet','Quatrain','Free Verse','Blank Verse','Syllabic','Common Measure','Epigraph','Assonance','Consonance','Alliteration','Allusion','Simile','Metaphor','Imagery','Refrain','Aphorism','Persona','Imagist','Confessional','Symbolist','Ode','Pastoral','Aubade','Dramatic Monologue','Elegy','Epistle','Epithalamion','Concrete or Pattern Poetry','Epigram','Prose Poem','Series/Sequence','Visual Poetry','Ars Poetica','Ekphrasis','Epic','Nursery Rhymes']
 

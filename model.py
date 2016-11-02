@@ -36,8 +36,8 @@ class Author(db.Model):
 
     author_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
-    region_code = db.Column(db.String(100), db.ForeignKey('regions.region_code'))
-    affiliation_code = db.Column(db.String(100), db.ForeignKey('affiliations.affiliation_code'))
+    region_id = db.Column(db.Integer, db.ForeignKey('regions.region_id'))
+    affiliation_id = db.Column(db.Integer, db.ForeignKey('affiliations.affiliation_id'))
     
     birthdate = db.Column(db.Date)
     deathdate = db.Column(db.Date)
@@ -57,7 +57,7 @@ class Region(db.Model):
 
     __tablename__ = 'regions'
 
-    region_code = db.Column(db.String(100), primary_key=True)
+    region_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     region_name = db.Column(db.String(300), nullable=False)
 
     def __repr__(self):
@@ -71,7 +71,7 @@ class Affiliation(db.Model):
 
     __tablename__ = 'affiliations'
 
-    affiliation_code = db.Column(db.String(100), primary_key=True)
+    affiliation_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     affiliation_name = db.Column(db.String(300), nullable=False)
 
     def __repr__(self):
@@ -99,7 +99,7 @@ class Subject(db.Model):
 
     __tablename__ = 'subjects'
 
-    subject_code = db.Column(db.String(100), primary_key=True)
+    subject_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     subject_name = db.Column(db.String(300), nullable=False)
 
     def __repr__(self):
@@ -129,7 +129,7 @@ class PoemSubject(db.Model):
     __tablename__ = 'poems_subjects'
 
     poems_subjects_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    subject_code = db.Column(db.String(100), db.ForeignKey('subjects.subject_code'), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.subject_id'), nullable=False)
     poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
 
 
