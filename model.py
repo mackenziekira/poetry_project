@@ -24,19 +24,6 @@ class Poem(db.Model):
     subjects = db.relationship('Subject', secondary='poems_subjects', backref='poems')
     poetic_terms = db.relationship('PoeticTerm', secondary='poems_poetic_terms', backref='poems')
 
-    @staticmethod
-    def parse_poem(soup):
-        selector = soup.find('div', class_="poem")
-
-        if selector:
-            return selector.text
-
-    @staticmethod
-    def parse_title(soup):
-        selector = soup.find('title')
-
-        if selector:
-            return selector.string
 
 
 class Author(db.Model):
