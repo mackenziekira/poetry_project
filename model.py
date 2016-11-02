@@ -84,8 +84,13 @@ class PoeticTerm(db.Model):
 
     __tablename__ = 'poetic_terms'
 
-    term_code = db.Column(db.String(100), primary_key=True)
+    term_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     term_name = db.Column(db.String(300), nullable=False)
+
+    def __repr__(self):
+        """repr for a more readable poetic term object"""
+        return "{}".format(self.term_name)
+
 
 
 
@@ -96,6 +101,11 @@ class Subject(db.Model):
 
     subject_code = db.Column(db.String(100), primary_key=True)
     subject_name = db.Column(db.String(300), nullable=False)
+
+    def __repr__(self):
+        """repr for a more readable subject object"""
+        return "{}".format(self.subject_name)
+
 
 
 
@@ -108,7 +118,7 @@ class PoemPoeticTerm(db.Model):
     __tablename__ = 'poems_poetic_terms'
 
     poems_poetic_terms_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    term_code = db.Column(db.String(100), db.ForeignKey('poetic_terms.term_code'), nullable=False)
+    term_id = db.Column(db.Integer, db.ForeignKey('poetic_terms.term_id'), nullable=False)
     poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
 
 

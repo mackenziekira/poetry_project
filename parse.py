@@ -60,12 +60,18 @@ class Parse(object):
     }
 
     subjects = {
-    '': ''
+    "lov":"Love",
+    "nat":"Nature",
+    "soc":"Social Commentaries",
+    "rel":"Religion",
+    "liv":"Living",
+    "res":"Relationships",
+    "act":"Activities",
+    "art":"Arts & Sciences",
+    "myt":"Mythology & Folklore"
     }
 
-    poetic_terms = {
-    '':''
-    }
+    poetic_terms = ['Ballad','Haiku','Limerick','Sestina','Sonnet','Villanelle','Pantoum','Ghazal','Couplet','Ottava Rima','Terza Rima','Rhymed Stanza','Mixed','Tercet','Quatrain','Free Verse','Blank Verse','Syllabic','Common Measure','Epigraph','Assonance','Consonance','Alliteration','Allusion','Simile','Metaphor','Imagery','Refrain','Aphorism','Persona','Imagist','Confessional','Symbolist','Ode','Pastoral','Aubade','Dramatic Monologue','Elegy','Epistle','Epithalamion','Concrete or Pattern Poetry','Epigram','Prose Poem','Series/Sequence','Visual Poetry','Ars Poetica','Ekphrasis','Epic','Nursery Rhymes']
 
     @staticmethod
     def parse_name(soup):
