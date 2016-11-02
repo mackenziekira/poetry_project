@@ -8,7 +8,8 @@ from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 def load_author(soup):
     """loads author from raw_poem file into db"""
 
-    name = Author.parse_name(soup)   
+    name = Author.parse_name(soup)
+
     try:
         Author.query.filter_by(name = name).one()
         return
@@ -21,10 +22,6 @@ def load_author(soup):
 
 def load_poem(soup):
     """load poem from raw_poem file into database"""
-
-    #delete all rows in table so if we need to run this again, we won't add duplicate poems
-    #CHANGE THIS LATER SO THAT DROP DOESNT EXIST, BUT THIS FUNCTION SHOULD STILL NOT ADD DUPES
-
 
     title = Poem.parse_title(soup)
     body = Poem.parse_poem(soup)

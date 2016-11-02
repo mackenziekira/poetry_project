@@ -63,6 +63,20 @@ class Author(db.Model):
         if selector:
             return selector['content']
 
+    @staticmethod
+    def parse_region(soup):
+        selector = soup.find('a', href=re.compile(r"poets#geography"))
+
+        if selector:
+            return selector.text
+
+    @staticmethod
+    def parse_school(soup):
+        selector = soup.find('a', href=re.compile(r"poets#school-period"))
+
+        if selector:
+            return selector.text
+
 
 
 class Region(db.Model):
