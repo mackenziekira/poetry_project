@@ -24,6 +24,9 @@ class Poem(db.Model):
     subjects = db.relationship('Subject', secondary='poems_subjects', backref='poems')
     poetic_terms = db.relationship('PoeticTerm', secondary='poems_poetic_terms', backref='poems')
 
+    def __repr__(self):
+        """repr for a more readable poem object"""
+        return "{}".format(self.title.encode('unicode-escape'))
 
 
 class Author(db.Model):
@@ -43,26 +46,9 @@ class Author(db.Model):
     region = db.relationship('Region', backref='authors')
     affiliation = db.relationship('Affiliation', backref='authors')
 
-    @staticmethod
-    def parse_name(soup):
-        selector = soup.find(property="article:author")
-
-        if selector:
-            return selector['content']
-
-    @staticmethod
-    def parse_region(soup):
-        selector = soup.find('a', href=re.compile(r"poets#geography"))
-
-        if selector:
-            return selector.text
-
-    @staticmethod
-    def parse_school(soup):
-        selector = soup.find('a', href=re.compile(r"poets#school-period"))
-
-        if selector:
-            return selector.text
+    def __repr__(self):
+        """repr for a more readable author object"""
+        return "{}".format(self.name.encode('unicode-escape'))
 
 
 
@@ -74,6 +60,10 @@ class Region(db.Model):
     region_code = db.Column(db.String(100), primary_key=True)
     region_name = db.Column(db.String(300), nullable=False)
 
+    def __repr__(self):
+        """repr for a more readable region object"""
+        return "{}".format(self.region_name)
+
 
 
 class Affiliation(db.Model):
@@ -83,6 +73,10 @@ class Affiliation(db.Model):
 
     affiliation_code = db.Column(db.String(100), primary_key=True)
     affiliation_name = db.Column(db.String(300), nullable=False)
+
+    def __repr__(self):
+        """repr for a more readable region object"""
+        return "{}".format(self.affiliation_name)
 
 
 class PoeticTerm(db.Model):
