@@ -7,11 +7,6 @@ class Parse(object):
 
     affiliations = ['Augustan','Beat','Black Arts Movement','Black Mountain','Confessional','Fugitive','Georgian','Harlem Renaissance','Imagist','Language Poetry','Middle English','Modern','New York School','New York School (2nd Generation)','Objectivist','Renaissance','Romantic','Victorian']
 
-    subjects = ['Love','Nature','Social Commentaries','Religion','Living','Relationships','Activities','Arts & Sciences','Mythology & Folklore']
-
-    poetic_terms = ['Ballad','Haiku','Limerick','Sestina','Sonnet','Villanelle','Pantoum','Ghazal','Couplet','Ottava Rima','Terza Rima','Rhymed Stanza','Mixed','Tercet','Quatrain','Free Verse','Blank Verse','Syllabic','Common Measure','Epigraph','Assonance','Consonance','Alliteration','Allusion','Simile','Metaphor','Imagery','Refrain','Aphorism','Persona','Imagist','Confessional','Symbolist','Ode','Pastoral','Aubade','Dramatic Monologue','Elegy','Epistle','Epithalamion','Concrete or Pattern Poetry','Epigram','Prose Poem','Series/Sequence','Visual Poetry','Ars Poetica','Ekphrasis','Epic','Nursery Rhymes']
-
-    @staticmethod
     def parse_name(soup):
         selector = soup.find(property="article:author")
 
@@ -45,3 +40,11 @@ class Parse(object):
 
         if selector:
             return selector.text
+
+
+    @staticmethod
+    def parse_subjects(soup):
+        selector = soup.find(property='article:tag')
+
+        if selector:
+            return selector['content'].split(',')

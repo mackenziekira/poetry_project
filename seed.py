@@ -1,5 +1,5 @@
 from model import connect_to_db, db 
-from model import Poem, Author, Region, Affiliation, PoeticTerm, Subject, PoemPoeticTerm, PoemSubject
+from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 from server import app
 from bs4 import BeautifulSoup
 import os
@@ -21,20 +21,6 @@ def load_regions():
         db.session.add(region)
         db.session.commit()
 
-def load_subjects():
-    """loads subject names and codes"""
-    for s in Parse.subjects:
-        subject = Subject(subject_name=s)
-        db.session.add(subject)
-        db.session.commit()
-
-def load_poeticterms():
-    """loads poetic terms and codes"""
-    for t in Parse.poetic_terms:
-        term = PoeticTerm(term_name=t)
-        db.session.add(term)
-        db.session.commit()
-
 
 def load_affiliations():
     """loads affiliation names and codes"""
@@ -42,6 +28,7 @@ def load_affiliations():
         affiliation = Affiliation(affiliation_name=a)
         db.session.add(affiliation)
         db.session.commit()
+
 
 
 def load_author(soup):
@@ -83,7 +70,7 @@ def load_poem(soup):
     title = Parse.parse_title(soup)
     body = Parse.parse_poem(soup)
     author_id = Author.query.filter(Author.name == Parse.parse_name(soup)).one().author_id
-    
+
 
     poem = Poem(title=title,
         body=body,
@@ -93,6 +80,31 @@ def load_poem(soup):
     db.session.add(poem)
 
     db.session.commit()
+
+
+
+def load_subjects(soup):
+    """loads subjects from poem meta tags"""
+
+    subjects = Parse.parse_subjects(soup)
+
+    for subject in subjects:
+        try:
+            subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
+        except NoResultFound:
+            log_err('subject', f, subject)
+            s = Subject(subject_name=subject)
+            db.session.add(s)
+            db.session.commit()
+            subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
+            
+
+        poem_id = Poem.query.filter(Poem.title == Parse.parse_title(soup)).one().poem_id
+
+        poemsubject = PoemSubject(poem_id=poem_id,
+                                    subject_id=subject_id)
+        db.session.add(poemsubject)
+        db.session.commit()
 
 
 
@@ -112,8 +124,7 @@ if __name__ == "__main__":
 
     load_regions()
     load_affiliations()
-    load_subjects()
-    load_poeticterms()
+    # load_subjects()
 
     # Import data into database
 
@@ -125,7 +136,9 @@ if __name__ == "__main__":
 
         soup = BeautifulSoup(text, 'html.parser')
 
+        
         load_author(soup)
         load_poem(soup)
+        load_subjects(soup)
 
         text.close()

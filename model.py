@@ -22,7 +22,6 @@ class Poem(db.Model):
 
     author = db.relationship('Author', backref='poems')
     subjects = db.relationship('Subject', secondary='poems_subjects', backref='poems')
-    poetic_terms = db.relationship('PoeticTerm', secondary='poems_poetic_terms', backref='poems')
 
     def __repr__(self):
         """repr for a more readable poem object"""
@@ -79,21 +78,6 @@ class Affiliation(db.Model):
         return "{}".format(self.affiliation_name)
 
 
-class PoeticTerm(db.Model):
-    """class for poetic terms associated with a poem"""
-
-    __tablename__ = 'poetic_terms'
-
-    term_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    term_name = db.Column(db.String(300), nullable=False)
-
-    def __repr__(self):
-        """repr for a more readable poetic term object"""
-        return "{}".format(self.term_name)
-
-
-
-
 class Subject(db.Model):
     """class for subjects"""
 
@@ -110,17 +94,7 @@ class Subject(db.Model):
 
 
 #################################################################################
-#A couple association tables
-
-class PoemPoeticTerm(db.Model):
-    """association table connecting poems with poetic terms"""
-
-    __tablename__ = 'poems_poetic_terms'
-
-    poems_poetic_terms_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    term_id = db.Column(db.Integer, db.ForeignKey('poetic_terms.term_id'), nullable=False)
-    poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
-
+#An association tables
 
 
 class PoemSubject(db.Model):
