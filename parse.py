@@ -7,6 +7,7 @@ class Parse(object):
 
     affiliations = ['Augustan','Beat','Black Arts Movement','Black Mountain','Confessional','Fugitive','Georgian','Harlem Renaissance','Imagist','Language Poetry','Middle English','Modern','New York School','New York School (2nd Generation)','Objectivist','Renaissance','Romantic','Victorian']
 
+    @staticmethod
     def parse_name(soup):
         selector = soup.find(property="article:author")
 

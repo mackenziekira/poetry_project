@@ -35,13 +35,14 @@ def load_author(soup):
     """loads author from raw_poem file into db"""
 
     name = Parse.parse_name(soup)
-    region = Parse.parse_region(soup)
-    affiliation = Parse.parse_school(soup)
+
 
     try:
         Author.query.filter_by(name = name).one()
         return
     except NoResultFound:
+        region = Parse.parse_region(soup)
+        affiliation = Parse.parse_school(soup)
 
         try:
             region = Region.query.filter(Region.region_name == region).one().region_id
@@ -57,7 +58,7 @@ def load_author(soup):
                         region_id=region,
                         affiliation_id=affiliation)
         db.session.add(author)
-        db.session.commit()
+
     except MultipleResultsFound:
         print 'multiple results found for author name. db corrupted. investigate!'
 
@@ -79,7 +80,6 @@ def load_poem(soup):
 
     db.session.add(poem)
 
-    db.session.commit()
 
 
 
@@ -104,7 +104,7 @@ def load_subjects(soup):
         poemsubject = PoemSubject(poem_id=poem_id,
                                     subject_id=subject_id)
         db.session.add(poemsubject)
-        db.session.commit()
+
 
 
 
@@ -140,5 +140,6 @@ if __name__ == "__main__":
         load_author(soup)
         load_poem(soup)
         load_subjects(soup)
+        db.session.commit()
 
         text.close()

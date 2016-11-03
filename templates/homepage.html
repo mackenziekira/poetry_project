@@ -1,0 +1,16 @@
+<!doctype HTML>
+
+<html>
+<head>
+    <title>Poetry Project</title>
+</head>
+<body>
+    hey you!
+    {% for poem in poems %}
+        <p>{{ poem.title}}</p>
+        <p>{{ poem.body }}</p>
+        <p>{{ poem.author }}</p>
+        <p>{{ poem.author.affiliation }}</p>
+    {% endfor %}
+</body>
+</html>
