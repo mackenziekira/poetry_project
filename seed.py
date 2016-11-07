@@ -88,15 +88,16 @@ def load_subjects(soup):
 
     subjects = Parse.parse_subjects(soup)
 
-    for subject in subjects:
-        try:
-            subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
-        except NoResultFound:
-            log_err('subject', f, subject)
-            s = Subject(subject_name=subject)
-            db.session.add(s)
-            db.session.commit()
-            subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
+    if subjects:
+        for subject in subjects:
+            try:
+                subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
+            except NoResultFound:
+                log_err('subject', f, subject)
+                s = Subject(subject_name=subject)
+                db.session.add(s)
+                db.session.commit()
+                subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
             
 
         poem_id = Poem.query.filter(Poem.title == Parse.parse_title(soup)).one().poem_id
