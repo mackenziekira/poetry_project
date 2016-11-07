@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import os
 from parse import Parse
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+from sqlalchemy import func
 
 def log_err(category, associated_thing, value):
     """logs errors in db population process"""
@@ -71,12 +72,15 @@ def load_poem(soup):
     title = Parse.parse_title(soup)
     body = Parse.parse_poem(soup)
     author_id = Author.query.filter(Author.name == Parse.parse_name(soup)).one().author_id
+    tsv = func.to_tsvector(' '.join([title, body]))
+    print tsv
 
 
     poem = Poem(title=title,
         body=body,
         poem_url="",
-        author_id=author_id)
+        author_id=author_id,
+        tsv=tsv)
 
     db.session.add(poem)
 

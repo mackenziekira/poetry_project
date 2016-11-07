@@ -1,7 +1,7 @@
 """Models and database functions for Poetry project"""
 
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy.dialects.postgresql import TSVECTOR
 
 db = SQLAlchemy()
 
@@ -15,11 +15,22 @@ class Poem(db.Model):
 
     __tablename__ = 'poems'
 
+    __table_args__ = ( 
+            db.Index( 
+                    'tsv_full', 
+                    'tsv', 
+                    postgresql_using = 'gin', 
+                    ),
+            )
+
+
     poem_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('authors.author_id'))
     poem_url = db.Column(db.String(300), nullable=False)
     body = db.Column(db.Text, nullable=False)
+    tsv = db.Column(TSVECTOR)
+
 
     author = db.relationship('Author', backref='poems')
     subjects = db.relationship('Subject', secondary='poems_subjects', backref='poems')
