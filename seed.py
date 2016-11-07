@@ -73,7 +73,6 @@ def load_poem(soup):
     body = Parse.parse_poem(soup)
     author_id = Author.query.filter(Author.name == Parse.parse_name(soup)).one().author_id
     tsv = func.to_tsvector(' '.join([title, body]))
-    print tsv
 
 
     poem = Poem(title=title,
@@ -81,6 +80,9 @@ def load_poem(soup):
         poem_url="",
         author_id=author_id,
         tsv=tsv)
+
+    print title
+    print poem.tsv
 
     db.session.add(poem)
 
