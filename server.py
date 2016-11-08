@@ -1,9 +1,8 @@
 from jinja2 import StrictUndefined
-
 from flask import Flask, jsonify, render_template, redirect, request, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, Poem, Author, Region
-import spacy
+from model import connect_to_db, db 
+from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 
 
 app = Flask(__name__)
@@ -22,26 +21,11 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    nlp = spacy.load('en')
+    term = request.args.get('term')
 
-    poems = Poem.query.all()
+    poems = Poem.query.filter(Poem.tsv.match(term)).all()
 
-    docs = [nlp(body) for body in [poem.body for poem in poems]]
-
-    t = nlp.vocab[u'kiss']
-
-    sents = []
-    objects = []
-
-    for doc in docs:
-        for sent in doc.sents:
-            for token in sent:
-                if token.orth == t.orth:
-                    sents.append(sent.text)
-                    objects.append(poems[docs.index(doc)])
-
-
-    return render_template("homepage.html", sents=sents, objects=objects)
+    return render_template("homepage.html", poems=poems)
 
 
 if __name__ == "__main__":
