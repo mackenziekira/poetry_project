@@ -12,6 +12,9 @@
         {% for poem in poems %}
             <p>{{ poem.title }}</p>
             <p>{{ poem.body }}</p>
+            <p>{{ poem.subjects }}</p>
+            <p>{{ poem.author.region }}</p>
+            <p>{{ poem.author.affiliation }}</p>
 
         {% endfor %}
     {% endif %}

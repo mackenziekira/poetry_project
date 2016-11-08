@@ -33,7 +33,8 @@ class Parse(object):
         selector = soup.find('title')
 
         if selector:
-            return selector.string
+            match = re.search('(.*) by [A-Z]', selector.string)
+            return match.groups()[0]
 
     @staticmethod
     def parse_poem(soup):

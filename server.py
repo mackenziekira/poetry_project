@@ -23,7 +23,10 @@ def index():
 
     term = request.args.get('term')
 
+
     poems = Poem.query.filter(Poem.tsv.match(term)).all()
+
+    
 
     return render_template("homepage.html", poems=poems)
 
@@ -32,6 +35,7 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
     app.debug = True
+    app.config['SQLALCHEMY_ECHO'] = True
 
     app.jinja_env.auto_reload = True
     connect_to_db(app)
