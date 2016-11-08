@@ -8,7 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from sqlalchemy import func
 
 def log_err(category, associated_thing, value):
-    """logs errors in db population process"""
+    """logs hiccups in db population process"""
 
     e = open('err', 'a')
     e.write(category + ' for ' + associated_thing + ' was ' + str(value) + '\n')
@@ -39,8 +39,8 @@ def load_author(soup):
 
 
     try:
-        Author.query.filter_by(name = name).one()
-        return
+        author = Author.query.filter_by(name = name).one()
+        return author
     except NoResultFound:
         region = Parse.parse_region(soup)
         affiliation = Parse.parse_school(soup)
@@ -59,6 +59,8 @@ def load_author(soup):
                         region_id=region,
                         affiliation_id=affiliation)
         db.session.add(author)
+        db.session.flush()
+        return author
 
     except MultipleResultsFound:
         print 'multiple results found for author name. db corrupted. investigate!'
@@ -66,12 +68,12 @@ def load_author(soup):
 
 
 
-def load_poem(soup):
+def load_poem(soup, author):
     """load poem from raw_poem file into database"""
 
     title = Parse.parse_title(soup)
     body = Parse.parse_poem(soup)
-    author_id = Author.query.filter(Author.name == Parse.parse_name(soup)).one().author_id
+    author_id = author.author_id
     tsv = func.to_tsvector(' '.join([title, body]))
 
 
@@ -81,15 +83,15 @@ def load_poem(soup):
         author_id=author_id,
         tsv=tsv)
 
-    print title
-    print poem.tsv
-
     db.session.add(poem)
+    db.session.flush()
+
+    return poem
 
 
 
 
-def load_subjects(soup):
+def load_subjects(soup, poem):
     """loads subjects from poem meta tags"""
 
     subjects = Parse.parse_subjects(soup)
@@ -106,7 +108,7 @@ def load_subjects(soup):
                 subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
             
 
-        poem_id = Poem.query.filter(Poem.title == Parse.parse_title(soup)).one().poem_id
+        poem_id = poem.poem_id
 
         poemsubject = PoemSubject(poem_id=poem_id,
                                     subject_id=subject_id)
@@ -131,7 +133,6 @@ if __name__ == "__main__":
 
     load_regions()
     load_affiliations()
-    # load_subjects()
 
     # Import data into database
 
@@ -144,9 +145,9 @@ if __name__ == "__main__":
         soup = BeautifulSoup(text, 'html.parser')
 
         
-        load_author(soup)
-        load_poem(soup)
-        load_subjects(soup)
+        author = load_author(soup)
+        poem = load_poem(soup, author)
+        subjects = load_subjects(soup, poem)
         db.session.commit()
 
         text.close()
