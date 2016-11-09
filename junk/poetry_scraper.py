@@ -4,11 +4,11 @@ from random import randint
 from time import sleep
 
 url = 'https://www.poetryfoundation.org/poetrymagazine/poems/detail/'
-params =  xrange(49057)
+params =  xrange(42700,42800)
 
 for param in params:
 
-    sleep(randint(10, 100))
+    sleep(randint(5, 20))
 
     r = requests.get(url + str(param))
 
