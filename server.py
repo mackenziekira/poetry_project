@@ -32,6 +32,14 @@ def index():
 
     return render_template("homepage.html", poems=poems)
 
+@app.route('/authors')
+def authors():
+    """displays a list of poets"""
+
+    authors = Author.query.all()
+
+    return render_template('authors.html', authors=authors)
+
 
 
 
