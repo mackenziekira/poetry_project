@@ -23,11 +23,14 @@ def index():
     """Homepage."""
 
     term = request.args.get('term')
-    term = '\'' + term +  '\''
+    # term = '\'' + term +  '\''
 
 
-    poems = Poem.query.filter(Poem.tsv.match(term)).all()
-
+    # poems = Poem.query.filter(Poem.tsv.match(term)).all()
+    qry = 'select poem_id, body, ts_headline(body, q) from poems, to_tsquery(\'{}\') q where q @@ tsv'.format(term)
+    cursor = db.session.execute(qry)
+    poems = cursor.fetchall()
+    db.session.commit()
     
 
     return render_template("homepage.html", poems=poems)

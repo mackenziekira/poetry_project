@@ -2,7 +2,13 @@
 {% block title %}{{ author.name }}{% endblock %}
 
 {% block content %}
-<p>{{ author.name }}</p>
-<p>{{ words }}</p>
+<h3>{{ author.name }}</h3>
+<p>{{ author.poems }}</p>
+
+<ul>
+{% for word in words %}
+    <li><a href="/?term={{ word[0] }}">{{ word[0] }}</a>: {{ word[2] }}</li>
+{% endfor %}
+</ul>
 
 {% endblock %}

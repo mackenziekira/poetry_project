@@ -7,11 +7,10 @@
     {% if poems %}
     <ul>
         {% for poem in poems %}
-            <li>{{ poem.title }}</li>
-            <li>{{ poem.body }}</li>
-            <li>{{ poem.subjects }}</li>
-            <li>{{ poem.author.region }}</li>
-            <li>{{ poem.author.affiliation }}</li>
+            <li>{{ poem[2] }}</li>
+            <li>{{ poem[1] }}</li>
+
+            <br/>
 
         {% endfor %}
     </ul>
