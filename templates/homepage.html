@@ -7,12 +7,28 @@
     {% if poems %}
     <ul>
         {% for poem in poems %}
-            <li>{{ poem[2] }}</li>
-            <li>{{ poem[1] }}</li>
+            <li class="title">{{ poem.title }}</li>
+            <li class="headline">{{ poem.headline | safe }}</li>
+            <button class="show-more" id = "{{ poem.poem_id }}" data-tooltip="{{ poem.body }}">
+                Show more
+            </button>
 
             <br/>
 
         {% endfor %}
     </ul>
     {% endif %}
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+
+function showMore(evt) {
+    var id = this.id;
+    alert(id)
+}
+
+$('.show-more').on('click', showMore)
+</script>
 {% endblock %}
+
+

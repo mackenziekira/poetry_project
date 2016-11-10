@@ -27,10 +27,14 @@ def index():
 
 
     # poems = Poem.query.filter(Poem.tsv.match(term)).all()
-    qry = 'select poem_id, body, ts_headline(body, q) from poems, to_tsquery(\'{}\') q where q @@ tsv'.format(term)
-    cursor = db.session.execute(qry)
-    poems = cursor.fetchall()
-    db.session.commit()
+
+    if term:
+        qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
+        cursor = db.session.execute(qry)
+        poems = cursor.fetchall()
+        db.session.commit()
+    else:
+        poems = []
     
 
     return render_template("homepage.html", poems=poems)
@@ -64,6 +68,7 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
     app.debug = True
+    app.config['SQLALCHEMY_ECHO'] = True
 
 
     app.jinja_env.auto_reload = True

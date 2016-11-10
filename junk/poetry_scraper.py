@@ -20,7 +20,7 @@ for param in params:
     if not poem:
         continue
     else:
-        filename = 'raw_poems/' + str(param) + '.html'
+        filename = '../raw_poems/' + str(param) + '.html'
         f = open(filename, 'w')
         f.write(r.text.encode('utf-8'))
         f.close()
