@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Poets{% endblock %}
 {% block content %}
-
+<ul>
     {% for author in authors %}
-        <p>{{ author.name }}</p>
+        <li><a href="/author/{{ author.author_id }}">{{ author.name }}</a></li>
 
     {% endfor %}
+</ul>
 
 {% endblock %}

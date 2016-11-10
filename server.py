@@ -40,7 +40,21 @@ def authors():
 
     return render_template('authors.html', authors=authors)
 
+@app.route('/author/<author_id>')
+def specfic_author(author_id):
+    """displays word stats for specific authors"""
 
+    qry = 'SELECT * FROM ts_stat(\'SELECT tsv FROM poems WHERE author_id = {}\') ORDER BY nentry DESC, ndoc DESC, word;'.format(author_id)
+
+    author = Author.query.get(author_id)
+
+    cursor = db.session.execute(qry)
+
+    words = cursor.fetchall()
+
+    db.session.commit()
+
+    return render_template('author.html', author=author, words=words)
 
 
 if __name__ == "__main__":
