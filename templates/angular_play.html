@@ -6,17 +6,32 @@
 <head>
     <title>angular</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
+
 <script>
-angular.module('wordsearch', []).controller('DisplayController', function ($scope){
+
+angular.module('wordsearch', []).controller('DisplayController', function ($scope) {
+
+    
     $scope.poem = 'hey'
+
 })
+
 </script>
 
-</head>
-<div ng-app="wordsearch" ng-controller="DisplayController">
-    Search: <input ng-model='term'>
 
-    <span ng-repeat="p in 'abcd'">
-        <button>{{ term }}</button>
-    </span>
+</head>
+<body>
+<div ng-app="wordsearch" ng-controller="DisplayController" id="content">
+<h1>Compare top words by subject</h1>
+<p>{{ poem }}</p>
+
+    <div id="letters">
+      <span ng-repeat="letter in 'abcdefghijklmnopqrstuvwxyz'">
+        <button ng-disabled="guesses[letter]"
+                ng-click="guess(letter)">{{ letter }}</button>
+      </span>
+    </div>
+
 </div>
+</body>
+</html>
