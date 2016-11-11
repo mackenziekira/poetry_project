@@ -9,8 +9,10 @@ https://www.postgresql.org/docs/8.3/static/textsearch-features.html
         ^ts_headline code
 
 
+Angular?
+D3 vis of something?
+practice w machine learning
 
-AJAX (and angular??) for data calls
 represent meta groupings (d3?)
 isolate sentences???
 practice with jupyter, machine learning, where to go next w project??

@@ -1,3 +1,8 @@
+NEED TO RUN
+pip install -U spacy
+python -m spacy.en.download all
+
+
 import spacy
 from model import connect_to_db, db 
 from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
@@ -20,3 +25,13 @@ for doc in docs:
                 sents.append(sent.text)
                 objects.append(poems[docs.index(doc)])
 
+
+
+ |          from spacy.en import English
+ |          nlp = English()
+ |          tokens = nlp(u'Mr. Best flew to New York on Saturday morning.')
+ |          ents = list(tokens.ents)
+ |          assert ents[0].label == 346
+ |          assert ents[0].label_ == 'PERSON'
+ |          assert ents[0].orth_ == 'Best'
+ |          assert ents[0].text == 'Mr. Best'

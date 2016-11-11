@@ -5,29 +5,29 @@
         <input name='term'>
     </form>
     {% if poems %}
-    <ul>
         {% for poem in poems %}
-            <li class="title">{{ poem.title }}</li>
-            <li class="headline">{{ poem.headline | safe }}</li>
-            <button class="show-more" id = "{{ poem.poem_id }}" data-tooltip="{{ poem.body }}">
-                Show more
-            </button>
-
-            <br/>
+        <div class="container">
+            <div class="headline" id="{{ poem.poem_id }}">{{ poem.headline | safe }}</div>
+            <div id="poem_{{ poem.poem_id }}" hidden>
+                {{ poem.body }}
+            </div>
+        </div>
+            
 
         {% endfor %}
-    </ul>
     {% endif %}
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
-function showMore(evt) {
-    var id = this.id;
-    alert(id)
+
+function toggleText(evt) {
+    var id = 'poem_' + this.id;
+    $("#" + id).toggle()
 }
 
-$('.show-more').on('click', showMore)
+
+$('.headline').on('click', toggleText)
 </script>
 {% endblock %}
 

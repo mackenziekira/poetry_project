@@ -63,6 +63,12 @@ def specfic_author(author_id):
 
     return render_template('author.html', author=author, words=words)
 
+@app.route('/angular')
+def angular():
+    """displays word stats for specific authors"""
+
+    return render_template('angular_play.html')
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
