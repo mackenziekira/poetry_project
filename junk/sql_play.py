@@ -9,9 +9,11 @@ https://www.postgresql.org/docs/8.3/static/textsearch-features.html
         ^ts_headline code
 
 
-Angular?
+Angular? subjects page
 D3 vis of something?
+incorporate displacy??
 practice w machine learning
+TESTING
 
 represent meta groupings (d3?)
 isolate sentences???

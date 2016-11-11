@@ -9,12 +9,16 @@
 
 <script>
 
-angular.module('wordsearch', []).controller('DisplayController', function ($scope) {
+var ang = angular.module('wordsearch', []).controller('DisplayController', function ($scope) {
 
     
     $scope.poem = 'hey'
 
 })
+ang.config(['$interpolateProvider', function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{a');
+  $interpolateProvider.endSymbol('a}');
+}]);
 
 </script>
 
@@ -23,12 +27,12 @@ angular.module('wordsearch', []).controller('DisplayController', function ($scop
 <body>
 <div ng-app="wordsearch" ng-controller="DisplayController" id="content">
 <h1>Compare top words by subject</h1>
-<p>{{ poem }}</p>
+<p>{a poem a}</p>
 
     <div id="letters">
       <span ng-repeat="letter in 'abcdefghijklmnopqrstuvwxyz'">
         <button ng-disabled="guesses[letter]"
-                ng-click="guess(letter)">{{ letter }}</button>
+                ng-click="guess(letter)">{a letter a}</button>
       </span>
     </div>
 
