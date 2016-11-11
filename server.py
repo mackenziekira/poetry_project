@@ -63,6 +63,14 @@ def specfic_author(author_id):
 
     return render_template('author.html', author=author, words=words)
 
+@app.route('/subjects')
+def subjects():
+    """explore by subjects"""
+
+    subjects = Subject.query.all()
+
+    return render_template('subjects.html', subjects=subjects)
+
 @app.route('/angular')
 def angular():
     """displays word stats for specific authors"""

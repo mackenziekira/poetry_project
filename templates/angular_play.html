@@ -16,7 +16,7 @@ angular.module('wordsearch', []).controller('DisplayController', function ($scop
 <div ng-app="wordsearch" ng-controller="DisplayController">
     Search: <input ng-model='term'>
 
-    <span ng-repeat="poem in 'abcd'">
-        <button>{{ poem }}</button>
+    <span ng-repeat="p in 'abcd'">
+        <button>{{ term }}</button>
     </span>
 </div>
