@@ -69,13 +69,8 @@ def subjects():
 
     subjects = Subject.query.all()
 
-    return render_template('subjects.html', subjects=subjects)
+    return render_template('angular_play.html', subjects=subjects)
 
-@app.route('/angular')
-def angular():
-    """displays word stats for specific authors"""
-
-    return render_template('angular_play.html')
 
 
 if __name__ == "__main__":

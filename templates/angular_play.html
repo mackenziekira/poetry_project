@@ -27,7 +27,13 @@ ang.config(['$interpolateProvider', function($interpolateProvider) {
 <body>
 <div ng-app="wordsearch" ng-controller="DisplayController" id="content">
 <h1>Compare top words by subject</h1>
-<p>{a poem a}</p>
+
+<ul>
+    {% for subject in subjects %}
+        <li>{{ subject.subject_name }}</li>
+
+    {% endfor %}
+</ul>
 
     <div id="letters">
       <span ng-repeat="letter in 'abcdefghijklmnopqrstuvwxyz'">
