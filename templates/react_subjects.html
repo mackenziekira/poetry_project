@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Subjects{% endblock %}
+{% block content %}
+
+<div id="root"></div>
+
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+
+function Subject(props) {
+  return (<p>
+    <span class="subject"><a href="/subject_info/1.json">{props.name}</a></span></p>);
+}
+
+
+
+class Content extends React.Component {
+    render() {
+    return (
+    <div>
+
+        <Subject name='{{ subjects[0].subject_name }}' />
+
+    </div>
+  );
+}
+}
+
+
+
+  ReactDOM.render(
+    <Content />,
+    document.getElementById('root')
+  );
+
+    </script>
+
+{% endblock %}

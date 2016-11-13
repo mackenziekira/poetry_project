@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Poets{% endblock %}
 {% block content %}
-<ul>
-    {% for subject in subjects %}
-        <li>{{ subject.subject_name }}</li>
 
-    {% endfor %}
-</ul>
+{% for subject in subjects %}
+<p><a href="/subject_info/{{ subject.subject_id }}">{{ subject.subject_name }}</a></p>
+{% endfor %}
 
 {% endblock %}

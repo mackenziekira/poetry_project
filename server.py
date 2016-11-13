@@ -6,6 +6,7 @@ from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 from sqlalchemy import func
 
 
+
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -67,10 +68,39 @@ def specfic_author(author_id):
 def subjects():
     """explore by subjects"""
 
-    subjects = Subject.query.all()
+    subjects = Subject.query.order_by('subject_name').all()
 
-    return render_template('angular_play.html', subjects=subjects)
+    return render_template('react_subjects.html', subjects=subjects)
 
+@app.route('/subject_info/<subject_id>.json')
+def subject_info(subject_id):
+    """get most common words for a given subject"""
+    # better way to fix this? need tuple to have at least two values, so this ensures no errors are thrown by psycopg2 
+    poem_ids = [0, 0]
+
+    relevant_poems = PoemSubject.query.filter_by(subject_id=subject_id).all()
+
+    for poem in relevant_poems:
+        poem_ids.append(poem.poem_id)    
+
+    poem_ids = tuple(poem_ids)
+
+
+    qry = 'SELECT * FROM ts_stat(\'SELECT tsv FROM poems WHERE poem_id IN {}\') ORDER BY nentry DESC, ndoc DESC, word LIMIT 10;'.format(poem_ids)
+
+
+    cursor = db.session.execute(qry)
+
+    words = cursor.fetchall()
+
+    db.session.commit()
+
+    word_dict = {}
+
+    for row in words:
+        word_dict[row[0]] = row[2]
+
+    return jsonify(word_dict)
 
 
 if __name__ == "__main__":
@@ -86,4 +116,4 @@ if __name__ == "__main__":
     # Use the DebugToolbar
     DebugToolbarExtension(app)
 
-    app.run(port=5000)
+    app.run('0.0.0.0')
