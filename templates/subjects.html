@@ -3,8 +3,31 @@
 {% block content %}
 
 {% for subject in subjects %}
-<p><a href="/subject_info/{{ subject.subject_id }}.json">{{ subject.subject_name }}</a></p>
+<button id="{{ subject.subject_id }}">{{ subject.subject_name }}</button>
 {% endfor %}
+
+<table id="table">
+
+</table>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+
+function renderTable(data) {
+    $('#table').append(JSON.stringify(data));
+}
+
+function fetchInfo(e) {
+    var id = this.id;
+    var url = '/subject_info/' + id + '.json';
+    $.get(url, renderTable);
+}
+
+$('button').on('click', fetchInfo);
+
+</script>
 
 
 {% endblock %}
