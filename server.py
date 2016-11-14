@@ -70,7 +70,7 @@ def subjects():
 
     subjects = Subject.query.order_by('subject_name').all()
 
-    return render_template('react_subjects.html', subjects=subjects)
+    return render_template('subjects.html', subjects=subjects)
 
 @app.route('/subject_info/<subject_id>.json')
 def subject_info(subject_id):
@@ -81,7 +81,8 @@ def subject_info(subject_id):
     relevant_poems = PoemSubject.query.filter_by(subject_id=subject_id).all()
 
     for poem in relevant_poems:
-        poem_ids.append(poem.poem_id)    
+        poem_ids.append(poem.poem_id) 
+    print poem_ids   
 
     poem_ids = tuple(poem_ids)
 

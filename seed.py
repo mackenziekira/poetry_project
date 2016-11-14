@@ -104,8 +104,8 @@ def load_subjects(soup, poem):
                 log_err('subject', f, subject)
                 s = Subject(subject_name=subject)
                 db.session.add(s)
-                db.session.commit()
-                subject_id = Subject.query.filter(Subject.subject_name == subject).one().subject_id
+                db.session.flush()
+                subject_id = s.subject_id
             
 
         poem_id = poem.poem_id

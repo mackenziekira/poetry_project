@@ -3,7 +3,8 @@
 {% block content %}
 
 {% for subject in subjects %}
-<p><a href="/subject_info/{{ subject.subject_id }}">{{ subject.subject_name }}</a></p>
+<p><a href="/subject_info/{{ subject.subject_id }}.json">{{ subject.subject_name }}</a></p>
 {% endfor %}
+
 
 {% endblock %}
