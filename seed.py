@@ -93,6 +93,7 @@ def load_poem(soup, author):
 
 def load_subjects(soup, poem):
     """loads subjects from poem meta tags"""
+    poem_id = poem.poem_id
 
     subjects = Parse.parse_subjects(soup)
 
@@ -108,11 +109,12 @@ def load_subjects(soup, poem):
                 subject_id = s.subject_id
             
 
-        poem_id = poem.poem_id
+            poemsubject = PoemSubject(poem_id=poem_id,
+                                        subject_id=subject_id)
 
-        poemsubject = PoemSubject(poem_id=poem_id,
-                                    subject_id=subject_id)
-        db.session.add(poemsubject)
+            db.session.add(poemsubject)
+
+            db.session.flush()
 
 
 
