@@ -4,38 +4,60 @@
 
 <div id="root"></div>
 
-    <script src="https://fb.me/react-15.0.0.js"></script>
-    <script src="https://fb.me/react-dom-15.0.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://fb.me/react-15.0.0.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
-    <script type="text/babel">
+<script type="text/babel">
 
-function Subject(props) {
-  return (<p>
-    <span class="subject"><a href="/subject_info/1.json">{props.name}</a></span></p>);
+
+
+// written based off of react tutorial: https://facebook.github.io/react/docs/thinking-in-react.html
+
+
+class SubjectList extends React.Component {
+    render() {
+        const subjects = this.props.subjects;
+        const todoItems = subjects.map((subject) =>
+          <li key={subject.id}>
+          {subject.name}
+          </li>
+          );
+        return (
+            <ul>{todoItems}</ul>
+            );
+    }
+}
+
+class WordTable extends React.Component {
+    render() {
+        return(
+            <h1>I did it!!</h1>
+            );
+    }
 }
 
 
 
 class Content extends React.Component {
     render() {
-    return (
-    <div>
-
-        <Subject name='{{ subjects[0].subject_name }}' />
-
-    </div>
-  );
-}
+        return(<div>
+            <SubjectList subjects={this.props.subjects} />
+            <WordTable />
+            </div>
+            );
+    }
 }
 
 
+const subjects = [{name: 'Airplane', id: 1}, {name: 'no man', id: 2}];
 
-  ReactDOM.render(
-    <Content />,
-    document.getElementById('root')
+ReactDOM.render(
+  <Content subjects={subjects} />,
+  document.getElementById('root')
   );
 
-    </script>
+</script>
+
 
 {% endblock %}

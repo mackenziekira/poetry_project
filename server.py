@@ -70,6 +70,7 @@ def subjects():
 
     subjects = Subject.query.order_by('subject_name').all()
 
+
     return render_template('react_subjects.html', subjects=subjects)
 
 @app.route('/subject_info/<subject_id>.json')
@@ -95,10 +96,10 @@ def subject_info(subject_id):
 
     db.session.commit()
 
-    word_dict = {}
+    word_dict = []
 
     for row in words:
-        word_dict[row[0]] = row[2]
+        word_dict.append({row[0]: row[2]})
 
     return jsonify(word_dict)
 
