@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}Subjects{% endblock %}
+{% block content %}
+
+<div id="root"></div>
+
+<script src="https://fb.me/react-15.0.0.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+<script type="text/babel">
+
+
+
+// written based off of react tutorial: https://facebook.github.io/react/docs/thinking-in-react.html
+
+
+class SubjectList extends React.Component {
+    constructor(props) {
+    super(props);
+  //   this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+    handleClick(e) {
+        e.preventDefault();
+        alert('clicked link');
+    }
+
+    render() {
+        const subjects = this.props.subjects;
+        const todoItems = subjects.map((subject) =>
+          <span key={subject.id}><a href="/subject_info/" onClick={this.handleClick}>
+          {subject.name}&nbsp;
+          </a></span>
+          );
+        return (
+            <div>{todoItems}</div>
+            );
+    }
+}
+
+function TableRow(props) {
+    return (
+        <tr>
+            <td>{props.subject.col1}</td>
+            <td>{props.subject.col2}</td>
+        </tr>
+        );
+}
+
+class WordTable extends React.Component {
+
+    render() {
+        const subjects = this.props.subjects;
+        const rows = subjects.map((subject) => <TableRow subject={subject} />);
+        return(
+            <table>
+            {rows}
+            </table>
+            );
+    }
+}
+
+class Content extends React.Component {
+    render () {
+        return (<div>
+            <SubjectList subjects={this.props.subjects} />
+            <WordTable subjects={this.props.subjects} />
+            </div>
+            );
+    }
+}
+
+
+class DataView extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+    handleClick(e) {
+        e.preventDefault();
+        alert('clicked link');
+    }
+    render() {
+        return(
+            <Content subjects={this.props.subjects} />
+            );
+    }
+}
+
+
+const subjects = [{name: 'Airplane', id: 1, col1: 'my', col2:'oh my'}, {name: 'no man', id: 2, col1: 'oh', col2: 'my oh'}];
+
+ReactDOM.render(
+  <DataView subjects={subjects} />,
+  document.getElementById('root')
+  );
+
+</script>
+
+
+{% endblock %}

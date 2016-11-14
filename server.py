@@ -70,7 +70,6 @@ def subjects():
 
     subjects = Subject.query.order_by('subject_name').all()
 
-
     return render_template('react_subjects.html', subjects=subjects)
 
 @app.route('/subject_info/<subject_id>.json')

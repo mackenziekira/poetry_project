@@ -4,7 +4,7 @@ from random import randint
 from time import sleep
 
 url = 'https://www.poetryfoundation.org/poetrymagazine/poems/detail/'
-params =  xrange(50726,50900)
+params =  xrange(90100,91300)
 
 for param in params:
 
