@@ -23,19 +23,24 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
+
     term = request.args.get('term')
     # term = '\'' + term +  '\''
 
+    if not term:
+        return render_template('homepage.html', poems=[], headlines=[], subjects=[])
 
     poems = Poem.query.filter(Poem.tsv.match(term)).all()
 
-    if term:
-        qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
-        cursor = db.session.execute(qry)
-        headlines = cursor.fetchall()
-        db.session.commit()
-    else:
-        headlines = []
+    if not poems:
+        flash('Word not found. Try another!')
+        return redirect('/')
+
+
+    qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
+    cursor = db.session.execute(qry)
+    headlines = cursor.fetchall()
+    db.session.commit()
 
     poem_ids = []
 
@@ -53,15 +58,12 @@ def index():
 
     cursor = db.session.execute(qry)
 
-    counts = cursor.fetchall()
+    subjects = cursor.fetchall()
 
     db.session.commit()
-
-    for row in counts:
-        print row
     
 
-    return render_template("homepage.html", headlines=headlines, poems=poems)
+    return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects)
 
 @app.route('/authors')
 def authors():

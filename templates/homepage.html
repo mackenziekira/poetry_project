@@ -22,6 +22,14 @@
         {% endfor %}
     {% endif %}
 
+    {% if subjects %}
+    <ul id="subject-list">
+        {% for subject in subjects %}
+            <li>{{ subject }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
