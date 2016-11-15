@@ -7,7 +7,12 @@
     {% if poems %}
         {% for poem in poems %}
         <div class="container">
-            <div class="headline" id="{{ poem.poem_id }}">{{ poem.headline | safe }}</div>
+            <div class="headline" id="{{ poem.poem_id }}" subjects="{{ poem.subjects }}" affiliation="{{ poem.author.affiliation }}" region="{{ poem.author.region }}">
+                {% for headline in headlines %}
+                    {% if headline.poem_id == poem.poem_id %} 
+                        {{ headline.headline | safe }}
+                    {% endif %} 
+                {% endfor %}</div>
             <div id="poem_{{ poem.poem_id }}" hidden>
                 {{ poem.body }}
             </div>

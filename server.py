@@ -27,18 +27,41 @@ def index():
     # term = '\'' + term +  '\''
 
 
-    # poems = Poem.query.filter(Poem.tsv.match(term)).all()
+    poems = Poem.query.filter(Poem.tsv.match(term)).all()
 
     if term:
         qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
         cursor = db.session.execute(qry)
-        poems = cursor.fetchall()
+        headlines = cursor.fetchall()
         db.session.commit()
     else:
-        poems = []
+        headlines = []
+
+    poem_ids = []
+
+    for poem in headlines:
+        poem_ids.append(poem[0])
+
+    metadata =[]
+
+    for poem_id in poem_ids:
+        metadata.append(Poem.query.get(poem_id))
+
+    poem_ids = tuple(poem_ids)
+
+    qry = "select s.subject_name, count(s.subject_name) from poems_subjects as ps join subjects as s on ps.subject_id = s.subject_id where ps.poem_id in {} group by s.subject_name order by count(s.subject_name) desc".format(poem_ids)
+
+    cursor = db.session.execute(qry)
+
+    counts = cursor.fetchall()
+
+    db.session.commit()
+
+    for row in counts:
+        print row
     
 
-    return render_template("homepage.html", poems=poems)
+    return render_template("homepage.html", headlines=headlines, poems=poems)
 
 @app.route('/authors')
 def authors():
