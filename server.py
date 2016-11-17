@@ -4,6 +4,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db 
 from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 from sqlalchemy import func
+from sqlalchemy.orm import subqueryload
 
 
 
@@ -30,7 +31,7 @@ def index():
     if not term:
         return render_template('homepage.html', poems=[], headlines=[], subjects=[])
 
-    poems = Poem.query.filter(Poem.tsv.match(term)).all()
+    poems = Poem.query.options(subqueryload(Poem.subjects)).filter(Poem.tsv.match(term)).all()
 
     if not poems:
         flash('Word not found. Try another!')
@@ -42,15 +43,10 @@ def index():
     headlines = cursor.fetchall()
     db.session.commit()
 
-    poem_ids = []
+    poem_ids = [0]
 
     for poem in headlines:
         poem_ids.append(poem[0])
-
-    metadata =[]
-
-    for poem_id in poem_ids:
-        metadata.append(Poem.query.get(poem_id))
 
     poem_ids = tuple(poem_ids)
 

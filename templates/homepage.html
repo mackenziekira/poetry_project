@@ -25,7 +25,7 @@
     {% if subjects %}
     <ul id="subject-list">
         {% for subject in subjects %}
-            <li>{{ subject }}</li>
+            <li id="{{ subject[0] }}" count="{{ subject[1] }}">{{ subject[0] }}: {{ subject[1] }}</li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -40,8 +40,14 @@ function toggleText(evt) {
     $("#" + id).toggle()
 }
 
+function highlightText(evt) {
+    var id = this.id;
+    $("")
+}
+
 
 $('.headline').on('click', toggleText)
+$('li').on('click', highlightText)
 </script>
 {% endblock %}
 

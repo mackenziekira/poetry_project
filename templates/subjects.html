@@ -7,6 +7,8 @@
 {% endfor %}
 
 <table id="table">
+    <tbody>
+    </tbody>
 
 </table>
 
@@ -16,7 +18,7 @@
 <script type="text/javascript">
 
 function renderTable(data) {
-    $('#table').append(JSON.stringify(data));
+    $('tbody').append('<tr><td>' + JSON.stringify(data) + '</td></tr>');
 }
 
 function fetchInfo(e) {
