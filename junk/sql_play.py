@@ -25,3 +25,26 @@ for position information, split tsv column of returned entries into dicts and fi
 
 
     locations = dict((k.strip('\''), int(v.replace(',', ''))) for k,v in (x.split(':') for x in b.split()))
+
+
+
+
+    SELECT 
+    p.*, 
+    ts_headline(body, q) AS headline, 
+    a.name, 
+    r.region_name, 
+    s.subject_name 
+INTO TEMP TABLE 
+    temporary 
+FROM poems p
+    LEFT JOIN authors a 
+        USING (author_id) 
+    LEFT JOIN regions r 
+        USING(region_id) 
+    LEFT JOIN poems_subjects ps 
+        USING (poem_id) 
+    LEFT JOIN subjects s 
+        USING (subject_id)
+    , to_tsquery('kiss') q 
+WHERE q @@ tsv

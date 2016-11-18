@@ -37,12 +37,13 @@
 
 function toggleText(evt) {
     var id = 'poem_' + this.id;
-    $("#" + id).toggle()
+    $("#" + id).toggle();
 }
 
 function highlightText(evt) {
     var id = this.id;
-    $("")
+    var subj = "div[subjects*='"+ id +"']";
+    $(subj).css("background-color", "yellow");
 }
 
 
