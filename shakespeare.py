@@ -5,6 +5,7 @@ from model import Author
 from model import connect_to_db, db 
 from server import app
 
+connect_to_db(app)
 
 shake = Author.query.get(169)
 text = []
