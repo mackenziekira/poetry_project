@@ -55,28 +55,21 @@ print_top_words(lda, tf_feature_names, n_top_words)
 #     print
 
 
-# determine k range
-k_range = range(1, 20)
+K = range(1,20)
+KM = [KMeans(n_clusters=k).fit(S) for k in K]
+centroids = [k.cluster_centers_ for k in KM]
 
-# fit kmeans model for each cluster number in k_range
-k_means_var = [KMeans(n_clusters=k).fit(S) for k in k_range]
+D_k = [cdist(S.toarray(), cent, 'euclidean') for cent in centroids]
+cIdx = [np.argmin(D,axis=1) for D in D_k]
+dist = [np.min(D,axis=1) for D in D_k]
+avgWithinSS = [sum(d)/S.shape[0] for d in dist]
 
-# get cluster centers for each model
-centroids = [X.cluster_centers_ for X in k_means_var]
-
-# euclidean distance from each point to each cluster center
-k_euclid = [cdist(S.toarray(), cent, 'euclidean') for cent in centroids]
-dist = [np.min(ke,axis=1) for ke in k_euclid]
-
-# total within cluster sum of squares
+# Total with-in sum of square
 wcss = [sum(d**2) for d in dist]
-
-# Total  sum of square
 tss = sum(pdist(S.toarray())**2)/S.shape[0]
-
-# between cluster sum of squares
 bss = tss-wcss
 
+kIdx = 10-1
 
 # elbow curve
 fig = plt.figure()
@@ -88,4 +81,11 @@ plt.grid(True)
 plt.xlabel('Number of clusters')
 plt.ylabel('Average within-cluster sum of squares')
 plt.title('Elbow for KMeans clustering')
-plt.show()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(K, bss/tss*100, 'b*-')
+plt.grid(True)
+plt.xlabel('Number of clusters')
+plt.ylabel('Percentage of variance explained')
+plt.title('Elbow for KMeans clustering')
