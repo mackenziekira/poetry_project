@@ -1,22 +1,5 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
-from model import Author, Poem
-from model import connect_to_db, db 
-from server import app
-
-connect_to_db(app)
-
-poems = Poem.query.all()
-
-# author = Author.query.get(1)
-text = []
-
-for poem in poems:
-    text.append(poem.body)
-
-vectorizer = TfidfVectorizer(stop_words='english')
-
-S = vectorizer.fit_transform(text)
+from vectorizer import S, feature_names
 
 
 n_topics = 10
@@ -36,9 +19,7 @@ def group_top_words(model, feature_names, n_top_words):
 
 lda.fit(S)
 
-tf_feature_names = vectorizer.get_feature_names()
-
-top_words = group_top_words(lda, tf_feature_names, n_top_words)
+top_words = group_top_words(lda, feature_names, n_top_words)
 
 sorted_keys = sorted(top_words.keys(), reverse=True)
 
