@@ -18,26 +18,35 @@ for i in range(true_k):
         print '{}'.format(feature_names[ind]),
     print
 
-# elbow method test to choose optimal k value
+# elbow method test to choose optimal k value. huge thanks to sarah guide (http://www.slideshare.net/SarahGuido/kmeans-clustering-with-scikitlearn) and marco dena (http://datascience.stackexchange.com/questions/6508/k-means-incoherent-behaviour-choosing-k-with-elbow-method-bic-variance-explain) for code guideline
 """
-
+# determine k range
 K = range(1,20)
+
+# fit kmeans model for each number of clusters in k range
 KM = [KMeans(n_clusters=k).fit(S) for k in K]
+
+# pull out cluster centers for each kmeans model
 centroids = [k.cluster_centers_ for k in KM]
 
+# calculate euclidean distance from each document point to each cluster center
 D_k = [cdist(S.toarray(), cent, 'euclidean') for cent in centroids]
 cIdx = [np.argmin(D,axis=1) for D in D_k]
 dist = [np.min(D,axis=1) for D in D_k]
 avgWithinSS = [sum(d)/S.shape[0] for d in dist]
 
-# Total with-in sum of square
+# Total within cluster sum of squares
 wcss = [sum(d**2) for d in dist]
+
+# total of sum of squares
 tss = sum(pdist(S.toarray())**2)/S.shape[0]
-bss = tss-wcss
+
+# between-cluster sum of squares
+bss = tss - wcss
 
 kIdx = 10-1
 
-# elbow curve
+# elbow curves
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.plot(K, avgWithinSS, 'b*-')

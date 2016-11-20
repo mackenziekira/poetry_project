@@ -3,7 +3,11 @@
 
 {% block content %}
 <h3>{{ author.name }}</h3>
-<p>{{ author.poems }}</p>
+<ul>
+{% for poem in author.poems %}
+<li><a href="/poem/{{ poem.poem_id }}">{{ poem.title }}</a></li>
+{% endfor %}
+</ul>
 
 <ul>
 {% for word in words %}

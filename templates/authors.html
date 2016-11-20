@@ -2,10 +2,11 @@
 {% block title %}Poets{% endblock %}
 {% block content %}
 <ul>
-    {% for author in authors %}
-        <li><a href="/author/{{ author.author_id }}">{{ author.name }}</a></li>
+    {% for author in authors|sort(attribute='word_count', reverse=True) %}
+        <li><a href="/author/{{ author.author_id }}">{{ author.word_count }}: {{ author.name }}</a></li>
 
     {% endfor %}
 </ul>
+
 
 {% endblock %}

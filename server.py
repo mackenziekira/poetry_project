@@ -66,6 +66,19 @@ def authors():
 
     authors = Author.query.all()
 
+    for author in authors:
+        qry = 'SELECT count(*) FROM ts_stat(\'SELECT tsv FROM poems WHERE author_id = {}\');'.format(author.author_id)
+
+        cursor = db.session.execute(qry)
+
+        word_count = cursor.fetchone()
+
+        # divide by /len(author.poems) to attenuate mismatch in sample size?
+        author.word_count = int(word_count[0])
+
+        db.session.commit()
+
+
     return render_template('authors.html', authors=authors)
 
 @app.route('/author/<author_id>')
@@ -74,7 +87,7 @@ def specfic_author(author_id):
 
     qry = 'SELECT * FROM ts_stat(\'SELECT tsv FROM poems WHERE author_id = {}\') ORDER BY nentry DESC, ndoc DESC, word;'.format(author_id)
 
-    author = Author.query.get(author_id)
+    author = Author.query.options(db.joinedload('poems')).get(author_id)
 
     cursor = db.session.execute(qry)
 
@@ -83,6 +96,16 @@ def specfic_author(author_id):
     db.session.commit()
 
     return render_template('author.html', author=author, words=words)
+
+@app.route('/poem/<poem_id>')
+def specific_poem(poem_id):
+    """displays a single poem"""
+
+    poem = Poem.query.get(poem_id)
+
+    db.session.commit()
+
+    return render_template('poem.html', poem=poem)
 
 
 @app.route('/subjects')
