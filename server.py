@@ -78,6 +78,7 @@ def authors():
 
         db.session.commit()
 
+    authors = sorted(authors, key=lambda author: author.word_count, reverse=True)
 
     return render_template('authors.html', authors=authors)
 
