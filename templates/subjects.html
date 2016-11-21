@@ -2,15 +2,18 @@
 {% block title %}Poets{% endblock %}
 {% block content %}
 
+<select id="subjects" name="subject">
 {% for subject in subjects %}
-<button id="{{ subject.subject_id }}">{{ subject.subject_name }}</button>
+<option value="{{ subject.subject_id }}">{{ subject.subject_name }}</value>
 {% endfor %}
+</select>
 
-<table id="table">
+<div class="container">
+  <table class="table table-striped">
     <tbody>
     </tbody>
-
-</table>
+  </table>
+</div>
 
 {% endblock %}
 
@@ -18,16 +21,22 @@
 <script type="text/javascript">
 
 function renderTable(data) {
-    $('tbody').append('<tr><td>' + JSON.stringify(data) + '</td></tr>');
+    $('tbody').append('<tr>');
+    $.each(data, function(key, value) {
+        $('tr').append('<td>' + value.count + ': ' + value.word + '</td>');
+});
+    $('tbody').append('</tr>');
+    
 }
 
 function fetchInfo(e) {
-    var id = this.id;
+    var id = this.value;
+    console.log(id)
     var url = '/subject_info/' + id + '.json';
     $.get(url, renderTable);
 }
 
-$('button').on('click', fetchInfo);
+$('#subjects').on('change', fetchInfo);
 
 </script>
 

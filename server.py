@@ -82,7 +82,7 @@ def get_authors():
             db.session.commit()
 
         authors = sorted(authors, key=lambda author: author.word_count, reverse=True)
-        cache.set('authors', authors, timeout=5 * 60)
+        cache.set('authors', authors, timeout=60 * 60)
     return authors
 
 @app.route('/authors')
@@ -155,7 +155,7 @@ def subject_info(subject_id):
     word_dict = []
 
     for row in words:
-        word_dict.append({row[0]: row[2]})
+        word_dict.append({'word': row[0], 'count': row[2]})
 
     return jsonify(word_dict)
 
