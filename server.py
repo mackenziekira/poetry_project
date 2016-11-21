@@ -4,9 +4,10 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db 
 from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 from sqlalchemy import func
+from werkzeug.contrib.cache import SimpleCache
 
 
-
+cache = SimpleCache()
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -60,25 +61,35 @@ def index():
 
     return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects)
 
+def get_authors():
+    authors = cache.get('authors')
+    if authors is None:
+        authors = Author.query.all()
+
+        for author in authors:
+            qry = 'SELECT count(*) FROM ts_stat(\'SELECT tsv FROM poems WHERE author_id = {}\');'.format(author.author_id)
+
+            cursor = db.session.execute(qry)
+
+            word_count = cursor.fetchone()
+
+            # divide by /len(author.poems) to attenuate mismatch in sample size?
+            author.word_count = int(word_count[0])
+            db.session.expunge(author)
+
+            db.session.commit()
+
+        authors = sorted(authors, key=lambda author: author.word_count, reverse=True)
+        cache.set('authors', authors, timeout=5 * 60)
+    return authors
+
 @app.route('/authors')
 def authors():
     """displays a list of poets"""
 
-    authors = Author.query.all()
+    authors = get_authors()
 
-    for author in authors:
-        qry = 'SELECT count(*) FROM ts_stat(\'SELECT tsv FROM poems WHERE author_id = {}\');'.format(author.author_id)
-
-        cursor = db.session.execute(qry)
-
-        word_count = cursor.fetchone()
-
-        # divide by /len(author.poems) to attenuate mismatch in sample size?
-        author.word_count = int(word_count[0])
-
-        db.session.commit()
-
-    authors = sorted(authors, key=lambda author: author.word_count, reverse=True)
+        
 
     return render_template('authors.html', authors=authors)
 
@@ -165,3 +176,4 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run('0.0.0.0')
+    
