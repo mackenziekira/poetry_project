@@ -13,7 +13,7 @@ text = []
 # for poem in poems:
 #     text.append(poem.body)
 
-f = open('middlemarch.txt', 'r')
+f = open('mashup.txt', 'r')
 
 for line in f:
     text.append(line)
