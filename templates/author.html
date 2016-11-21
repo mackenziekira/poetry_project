@@ -4,10 +4,11 @@
 {% block content %}
 <h3>{{ author.name }}</h3>
 <ul>
+<h5>Poems: </h5>
 {% for poem in author.poems %}
-<li><a href="/poem/{{ poem.poem_id }}">{{ poem.title }}</a></li>
+<div><a href="/poem/{{ poem.poem_id }}">{{ poem.title }}</a></div>
 {% endfor %}
-</ul>
+<br/>
 
 <ul>
 {% for word in words %}
@@ -16,3 +17,5 @@
 </ul>
 
 {% endblock %}
+
+

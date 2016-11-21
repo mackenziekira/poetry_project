@@ -62,6 +62,8 @@ def index():
     return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects)
 
 def get_authors():
+    """retrieve list of author objects (sorted by word stats) from the cache. else calculate list and return"""
+
     authors = cache.get('authors')
     if authors is None:
         authors = Author.query.all()
@@ -88,8 +90,6 @@ def authors():
     """displays a list of poets"""
 
     authors = get_authors()
-
-        
 
     return render_template('authors.html', authors=authors)
 

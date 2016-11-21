@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Poetry Project{% endblock %}
 {% block content %}
+<style>
+  .highlight {
+    background: yellow;
+  }
+  </style>
+
     <form action="/">
         <input name='term'>
     </form>
@@ -43,7 +49,7 @@ function toggleText(evt) {
 function highlightText(evt) {
     var id = this.id;
     var subj = "div[subjects*='"+ id +"']";
-    $(subj).css("background-color", "yellow");
+    $(subj).toggleClass("highlight");
 }
 
 
