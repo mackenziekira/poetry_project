@@ -1,0 +1,83 @@
+          
+-------------------------------------------------------------------------------------------
+ Limit  (cost=26.60..26.61 rows=5 width=23)
+   ->  Sort  (cost=26.60..26.81 rows=84 width=23)
+         Sort Key: (count(t.author_id)) DESC
+         ->  HashAggregate  (cost=24.37..25.21 rows=84 width=23)
+               Group Key: a.author_id
+               ->  Hash Join  (cost=13.89..23.95 rows=84 width=23)
+                     Hash Cond: (a.author_id = t.author_id)
+                     ->  Seq Scan on authors a  (cost=0.00..7.52 rows=452 width=19)
+                     ->  Hash  (cost=12.84..12.84 rows=84 width=4)
+                           ->  Seq Scan on temporary t  (cost=0.00..12.84 rows=84 width=4)
+(10 rows)
+
+
+-------------------------------------------------------------------------------------------------------
+ Limit  (cost=30.88..30.89 rows=5 width=23)
+   ->  Sort  (cost=30.88..30.89 rows=5 width=23)
+         Sort Key: (count(t.author_id)) DESC
+         ->  HashAggregate  (cost=30.77..30.82 rows=5 width=23)
+               Group Key: a.author_id
+               ->  Nested Loop  (cost=12.44..30.75 rows=5 width=23)
+                     ->  Nested Loop  (cost=12.29..29.78 rows=5 width=4)
+                           ->  Function Scan on to_tsquery q  (cost=0.25..0.26 rows=1 width=32)
+                           ->  Bitmap Heap Scan on poems t  (cost=12.04..29.47 rows=5 width=375)
+                                 Recheck Cond: (q.q @@ tsv)
+                                 ->  Bitmap Index Scan on tsv_full  (cost=0.00..12.04 rows=5 width=0)
+                                       Index Cond: (q.q @@ tsv)
+                     ->  Index Scan using authors_pkey on authors a  (cost=0.15..0.18 rows=1 width=19)
+                           Index Cond: (author_id = t.author_id)
+(14 rows)
+
+
+
+SELECT 
+    p.*, 
+    ts_headline(body, q) AS headline, 
+    a.name, 
+    r.region_name, 
+    s.subject_name 
+INTO TEMP TABLE 
+    temporary 
+FROM poems p
+    LEFT JOIN authors a 
+        USING (author_id) 
+    LEFT JOIN regions r 
+        USING(region_id) 
+    LEFT JOIN poems_subjects ps 
+        USING (poem_id) 
+    LEFT JOIN subjects s 
+        USING (subject_id)
+    , to_tsquery('kiss') q 
+WHERE q @@ tsv
+
+poems = Poem.query.options(subqueryload(Poem.subjects)).filter(Poem.tsv.match(term)).all()
+
+    if not poems:
+        flash('Word not found. Try another!')
+        return redirect('/')
+
+
+    qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
+    cursor = db.session.execute(qry)
+    headlines = cursor.fetchall()
+    db.session.commit()
+
+    poem_ids = [0]
+
+    for poem in headlines:
+        poem_ids.append(poem[0])
+
+    poem_ids = tuple(poem_ids)
+
+    qry = "select s.subject_name, count(s.subject_name) from poems_subjects as ps join subjects as s on ps.subject_id = s.subject_id where ps.poem_id in {} group by s.subject_name order by count(s.subject_name) desc limit 5".format(poem_ids)
+
+    cursor = db.session.execute(qry)
+
+    subjects = cursor.fetchall()
+
+    db.session.commit()
+
+
+    17236

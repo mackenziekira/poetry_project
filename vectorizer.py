@@ -5,50 +5,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 connect_to_db(app)
 
-# love = PoemSubject.query.filter_by(subject_id = 40).all()
-# love_poems = []
-# for s in love:
-#     love_poems.append(s.poem_id)
+def vectorize_poems(author_id):
+    """returns vectorized version of an author's corpus"""
+    
+    author = Author.query.get(author_id)
 
-# nature = PoemSubject.query.filter_by(subject_id = 29).all()
-# nature_poems = []
-# for s in nature:
-#     nature_poems.append(s.poem_id)
-
-# social = PoemSubject.query.filter_by(subject_id = 263).all()
-# social_poems = []
-# for s in social:
-#     social_poems.append(s.poem_id)
-
-# politics = PoemSubject.query.filter_by(subject_id = 16).all()
-# politic_poems = []
-# for s in social:
-#     politic_poems.append(s.poem_id)
-
-# poem_ids = love_poems + social_poems + nature_poems + politic_poems
-# poem_ids = set(poem_ids)
-
-# text = []
-# for poem in poem_ids:
-#     p = Poem.query.get(poem)
-#     text.append(p.body)
+    text = []
+    for poem in author.poems:
+        text.append(poem.body)
 
 
-poems = Poem.query.all()
+    vectorizer = TfidfVectorizer(stop_words='english')
 
-# author = Author.query.get(323)
+    S = vectorizer.fit_transform(text)
 
-text = []
-for poem in poems:
-    text.append(poem.body)
+    feature_names = vectorizer.get_feature_names()
 
-# f = open('subjectlda', 'r')
-
-# for line in f:
-#     text.append(line)
-
-vectorizer = TfidfVectorizer(stop_words='english')
-
-S = vectorizer.fit_transform(text)
-
-feature_names = vectorizer.get_feature_names()
+    return [S, feature_names]

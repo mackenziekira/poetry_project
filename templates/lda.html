@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Poets{% endblock %}
+{% block content %}
+
+
+<select id="authors" name="authors">
+{% for author in authors %}
+<option value="{{ author.author_id }}">{{ author.name }}</value>
+{% endfor %}
+</select>
+
+<div class="container">
+  <table class="table table-striped">
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+
+function renderTable(data) {
+    $('tbody').append('<tr id=' + counter + '>');
+    $.each(data, function(key, value) {
+        $('#' + counter).append('<td>' + value + '</td>');
+});
+    $('tbody').append('</tr>');
+    counter++;
+    
+}
+
+function fetchInfo(e) {
+    var id = this.value;
+    var url = '/author_lda/' + id + '.json';
+    $.get(url, renderTable);
+}
+
+$('#authors').on('change', fetchInfo);
+var counter = 0;
+
+</script>
+
+
+{% endblock %}

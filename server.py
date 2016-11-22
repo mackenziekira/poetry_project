@@ -5,6 +5,8 @@ from model import connect_to_db, db
 from model import Poem, Author, Region, Affiliation, Subject, PoemSubject
 from sqlalchemy import func
 from werkzeug.contrib.cache import SimpleCache
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
 
 
 cache = SimpleCache()
@@ -164,13 +166,73 @@ def subject_info(subject_id):
 def lda():
     """lda proof of concept page"""
 
-    return render_template('lda.html')
+    authors = Author.query.all()
+
+    return render_template('lda.html', authors=authors)
+
+@app.route('/author_lda/<author_id>.json')
+def author_lda(author_id):
+    """get topic breakdown for particular author"""
+
+    v = vectorize_poems(author_id)
+
+    lda = perform_lda(v[0], v[1])
+
+    return jsonify(lda)
 
 @app.route('/kmeans')
 def kmeans():
     """kmeans proof of concept page"""
 
     return render_template('kmeans.html')
+
+def vectorize_poems(author_id):
+    """returns vectorized version of an author's corpus"""
+    
+    author = Author.query.get(author_id)
+
+    text = []
+    for poem in author.poems:
+        text.append(poem.body)
+
+
+    vectorizer = TfidfVectorizer(stop_words='english')
+
+    S = vectorizer.fit_transform(text)
+
+    feature_names = vectorizer.get_feature_names()
+
+    return [S, feature_names]
+
+def perform_lda(S, feature_names):
+    """"""
+
+    n_topics = 10
+    n_top_words = 10
+
+    lda = LatentDirichletAllocation(n_topics=n_topics, max_iter=5,
+                                    learning_method='online',
+                                    learning_offset=50.,
+                                    random_state=0)
+
+    def group_top_words(model, feature_names, n_top_words):
+        top_words = {}
+        for topic in model.components_:
+            top_words[sum(topic)] = [feature_names[i]
+                            for i in topic.argsort()[:-n_top_words - 1:-1]]
+        return top_words
+
+    lda.fit(S)
+
+    top_words = group_top_words(lda, feature_names, n_top_words)
+
+    sorted_keys = sorted(top_words.keys(), reverse=True)
+
+    top_topics = []
+    for k in xrange(3):
+        top_topics.append(top_words[sorted_keys[k]])
+        
+    return top_topics
 
 
 if __name__ == "__main__":
