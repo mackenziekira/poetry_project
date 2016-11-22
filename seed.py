@@ -10,7 +10,7 @@ from sqlalchemy import func
 def log_err(category, associated_thing, value):
     """logs hiccups in db population process"""
 
-    e = open('err', 'a')
+    e = open('/junk/err', 'a')
     e.write(category + ' for ' + associated_thing + ' was ' + str(value) + '\n')
     e.close()
 

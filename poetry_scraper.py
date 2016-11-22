@@ -4,7 +4,7 @@ from random import randint
 from time import sleep
 
 url = 'https://www.poetryfoundation.org/poetrymagazine/poems/detail/'
-params =  xrange(90100,91300)
+params =  xrange(89897,89900)
 
 for param in params:
 
@@ -20,7 +20,7 @@ for param in params:
     if not poem:
         continue
     else:
-        filename = '../raw_poems/' + str(param) + '.html'
+        filename = 'raw_poems/' + str(param) + '.html'
         f = open(filename, 'w')
         f.write(r.text.encode('utf-8'))
         f.close()

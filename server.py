@@ -65,23 +65,6 @@ def authors():
 
     return render_template('authors.html', authors=authors)
 
-@app.route('/author/<author_id>')
-def specfic_author(author_id):
-    """displays word stats for specific authors"""
-
-    author = queries.author_top_words(author_id)
-
-    return render_template('author.html', author=author)
-
-@app.route('/poem/<poem_id>')
-def specific_poem(poem_id):
-    """displays a single poem"""
-
-    poem = Poem.query.get(poem_id)
-
-    db.session.commit()
-
-    return render_template('poem.html', poem=poem)
 
 
 @app.route('/subjects')
@@ -107,6 +90,28 @@ def explore_kmeans():
     """kmeans proof of concept page"""
 
     return render_template('kmeans.html')
+
+##########################################################################################################
+
+# unique id routes
+
+@app.route('/author/<author_id>')
+def specfic_author(author_id):
+    """displays word stats for specific authors"""
+
+    author = queries.author_top_words(author_id)
+
+    return render_template('author.html', author=author)
+
+@app.route('/poem/<poem_id>')
+def specific_poem(poem_id):
+    """displays a single poem"""
+
+    poem = Poem.query.get(poem_id)
+
+    db.session.commit()
+
+    return render_template('poem.html', poem=poem)
 
 ##########################################################################################################
 
