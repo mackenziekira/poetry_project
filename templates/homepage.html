@@ -5,6 +5,10 @@
   .highlight {
     background: yellow;
   }
+  div.poembody {
+    white-space: pre-wrap;
+    background: #e7e7e7;
+}
   </style>
 
     <form action="/">
@@ -19,11 +23,14 @@
                         {{ headline.headline | safe }}
                     {% endif %} 
                 {% endfor %}</div>
-            <div id="poem_{{ poem.poem_id }}" hidden>
-                {{ poem.body }}
+            <div id="poem_{{ poem.poem_id }}" class="poembody" hidden>
+                <h4>{{ poem.title }}</h4>
+                <h5>{{ poem.author }}</h5>
+                <p>{{ poem.body }}</p>
             </div>
         </div>
-            
+        
+
 
         {% endfor %}
     {% endif %}

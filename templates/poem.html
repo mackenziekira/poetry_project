@@ -2,10 +2,16 @@
 {% block title %}{{ poem.title }}{% endblock %}
 
 {% block content %}
+<style type="text/css">
+div.poembody {
+    white-space: pre-wrap
+}
+
+</style>
 <h2>{{ poem.title }}</h2>
 <h3>{{ poem.author }}</h3>
 
-<div>
+<div class="poembody">
     {{ poem.body }}
 </div>
 
