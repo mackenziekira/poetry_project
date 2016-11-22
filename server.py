@@ -207,7 +207,7 @@ def vectorize_poems(author_id):
 def perform_lda(S, feature_names):
     """given a tf_idf vectorized document(s) and feature names, returns lda analysis"""
 
-    n_topics = 10
+    n_topics = 20
     n_top_words = 10
 
     lda = LatentDirichletAllocation(n_topics=n_topics, max_iter=5,
