@@ -2,18 +2,15 @@
 {% block title %}Poets{% endblock %}
 {% block content %}
 
-
+<h1>Latent Dirichlet Allocation</h1>
 <select id="authors" name="authors">
 {% for author in authors %}
 <option value="{{ author.author_id }}">{{ author.name }}</value>
 {% endfor %}
 </select>
 
-<div class="container">
-  <table class="table table-striped">
-    <tbody>
-    </tbody>
-  </table>
+<div id="tables" class="container">
+
 </div>
 
 {% endblock %}
@@ -22,11 +19,13 @@
 <script type="text/javascript">
 
 function renderTable(data) {
-    $('tbody').append('<tr id=' + counter + '>');
-    $.each(data, function(key, value) {
-        $('#' + counter).append('<td>' + value + '</td>');
+    $('#tables').append('<table class="table table-striped"><tbody id=' + counter + '>');
+    $.each(data, function(k, v) {
+        console.log('ok');
+        console.log(v);
+        $('#' + counter).append('<tr><td>' + v + '</td></tr>');
 });
-    $('tbody').append('</tr>');
+    $('#tables').append('</tbody></table>');
     counter++;
     
 }
