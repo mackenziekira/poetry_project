@@ -131,6 +131,7 @@ def subjects():
 @app.route('/subject_info/<subject_id>.json')
 def subject_info(subject_id):
     """get most common words for a given subject"""
+
     # better way to fix this? need tuple to have at least two values, so this ensures no errors are thrown by psycopg2 
     poem_ids = [0, 0]
 
@@ -159,7 +160,17 @@ def subject_info(subject_id):
 
     return jsonify(word_dict)
 
+@app.route('/lda')
+def lda():
+    """lda proof of concept page"""
 
+    return render_template('lda.html')
+
+@app.route('/kmeans')
+def kmeans():
+    """kmeans proof of concept page"""
+
+    return render_template('kmeans.html')
 
 
 if __name__ == "__main__":

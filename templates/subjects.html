@@ -2,6 +2,7 @@
 {% block title %}Poets{% endblock %}
 {% block content %}
 
+
 <select id="subjects" name="subject">
 {% for subject in subjects %}
 <option value="{{ subject.subject_id }}">{{ subject.subject_name }}</value>
@@ -21,11 +22,12 @@
 <script type="text/javascript">
 
 function renderTable(data) {
-    $('tbody').append('<tr>');
+    $('tbody').append('<tr id=' + counter + '>');
     $.each(data, function(key, value) {
-        $('tr').append('<td>' + value.count + ': ' + value.word + '</td>');
+        $('#' + counter).append('<td>' + value.count + ': ' + value.word + '</td>');
 });
     $('tbody').append('</tr>');
+    counter++;
     
 }
 
@@ -37,6 +39,7 @@ function fetchInfo(e) {
 }
 
 $('#subjects').on('change', fetchInfo);
+var counter = 0;
 
 </script>
 

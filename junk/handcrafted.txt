@@ -1,0 +1,44 @@
+Shakespeare LDA:
+
+667.872880671 [u'suspect', u'suggest', u'time', u'striking', u'add', u'pluck', u'bed', u'faults', u'sovereign', u'shine', u'estimate', u'world', u'stone', u'excuse', u'husbandry', u'sweetly', u'birds', u'acquainted', u'showing', u'wert']
+
+666.882740151 [u'sigh', u'keen', u'thief', u'absent', u'tooth', u'odour', u'wrought', u'owls', u'nonny', u'art', u'coral', u'heads', u'confusion', u'compounds', u'write', u'green', u'glance', u'eye', u'new', u'truly']
+
+666.471004815 [u'suggest', u'bad', u'alack', u'ugly', u'forgeries', u'sweetest', u'trespass', u'noted', u'smoking', u'day', u'possessing', u'worser', u'sigh', u'fighting', u'amazed', u'rise', u'liking', u'tillage', u'rosy', u'tired']
+
+665.809520872 [u'sad', u'abundance', u'blood', u'pillow', u'couldst', u'stop', u'sovereign', u'windows', u'fell', u'keen', u'beating', u'deserved', u'lap', u'ram', u'drawn', u'passion', u'rocks', u'wilful', u'acceptance', u'hold']
+
+664.405229878 [u'thou', u'clouds', u'boundless', u'wise', u'usest', u'hangs', u'earth', u'doth', u'fly', u'women', u'away', u'pleasure', u'large', u'honey', u'hues', u'beguile', u'gift', u'little', u'shall', u'swaggering']
+
+664.232576471 [u'fear', u'flash', u'love', u'tyrant', u'wind', u'advocate', u'killed', u'censure', u'hot', u'nonny', u'daily', u'throne', u'citizen', u'corrupting', u'maid', u'thy', u'cowslip', u'substantial', u'modesty', u'acceptance']
+
+662.202979466 [u'world', u'win', u'flatter', u'buriest', u'alack', u'blamed', u'great', u'worldly', u'wall', u'receivest', u'wilful', u'refusest', u'turrets', u'forgive', u'boot', u'disdains', u'gentle', u'dwelling', u'triumph', u'cause']
+
+661.585178741 [u'past', u'ram', u'unto', u'forbid', u'controlled', u'swell', u'destitute', u'absent', u'near', u'dimmed', u'best', u'cypress', u'twain', u'detain', u'birds', u'behold', u'hath', u'robs', u'lads', u'power']
+
+659.540687701 [u'eyes', u'proving', u'renown\xe8d', u'hath', u'fell', u'shalt', u'pluck', u'beseechers', u'bell', u'know', u'unless', u'bough', u'angry', u'ta', u'bright', u'trembling', u'new', u'gaudy', u'sense', u'pots']
+
+
+
+
+Audre Lorde LDA:
+
+565.349173286 [u'golden', u'gut', u'blackness', u'kneel', u'jewel', u'moving', u'shred', u'sex', u'cablegram', u'daughter', u'touch', u'eyed', u'needs', u'imprisoned', u'milk', u'perfect', u'crash', u'truth', u'tax', u'nailed']
+
+563.004738305 [u'afternoon', u'burns', u'bereft', u'corner', u'leash', u'pot', u'keys', u'tembisa', u'women', u'witches', u'journeys', u'dahomey', u'bruises', u'blocked', u'force', u'magazines', u'wagers', u'microphone', u'hungry', u'truth']
+
+562.720515119 [u'renegade', u'betrayed', u'breast', u'step', u'climbs', u'baby', u'headed', u'touched', u'fell', u'diamond', u'opposite', u'rewarded', u'wondering', u'leading', u'river', u'weighs', u'inside', u'grid', u'rotting', u'breeding']
+
+561.195554432 [u'wall', u'set', u'needs', u'paper', u'etched', u'express', u'secrets', u'keeper', u'yestiddy', u'awash', u'bridge', u'coming', u'party', u'permanent', u'girl', u'thighs', u'rich', u'did', u'profit', u'strangers']
+
+560.810678107 [u'gouged', u'forget', u'jest', u'huge', u'silence', u'grader', u'woman', u'parlor', u'edge', u'hurl', u'set', u'fight', u'food', u'dwell', u'watching', u'orchid', u'saying', u'work', u'dreams', u'life']
+
+559.756452251 [u'neck', u'cars', u'fury', u'days', u'black', u'pride', u'asleep', u'fall', u'woman', u'wondering', u'fixed', u'wear', u'left', u'oceans', u'lost', u'glass', u'sister', u'edge', u'stops', u'tax']
+
+558.786617325 [u'hid', u'moves', u'guns', u'massacred', u'anchors', u'rose', u'coloured', u'directions', u'pleasures', u'chimney', u'pregnant', u'whistled', u'deep', u'remembering', u'day', u'buy', u'bread', u'boat', u'21st', u'wide']
+
+558.51792999 [u'plump', u'bone', u'blocked', u'belly', u'sitting', u'chimney', u'ragged', u'healing', u'beach', u'anniversary', u'televised', u'bread', u'dog', u'evolve', u'gave', u'avoid', u'decision', u'calabash', u'implodes', u'headed']
+
+557.17992001 [u'melodies', u'liberations', u'stops', u'catch', u'secret', u'ain', u'joyce', u'die', u'spoken', u'bedroom', u'finally', u'young', u'wear', u'nailed', u'wearing', u'boy', u'anger', u'flung', u'lying', u'brings']
+
+556.646574478 [u'bread', u'magic', u'iii', u'awash', u'know', u'relish', u'truth', u'dead', u'momma', u'dog', u'kinds', u'mississippi', u'buy', u'olds', u'reconstruct', u'flame', u'wear', u'floods', u'guns', u'infant']

@@ -6,7 +6,7 @@ from vectorizer import S, feature_names
 
 
 
-true_k = 5
+true_k = 3
 km = KMeans(n_clusters=true_k, init='k-means++', max_iter=1000, n_init=1)
 km.fit(S)
 print("Top terms per cluster:")
