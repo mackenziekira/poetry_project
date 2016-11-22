@@ -45,6 +45,7 @@
 
 {% endblock %}
 {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.4.1/jquery.mark.es6.js"></script>
 <script type="text/javascript">
 
 
@@ -62,6 +63,7 @@ function highlightText(evt) {
 
 $('.headline').on('click', toggleText)
 $('li').on('click', highlightText)
+$('.poembody').mark('divine')
 </script>
 {% endblock %}
 

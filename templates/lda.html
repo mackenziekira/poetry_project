@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>Latent Dirichlet Allocation</h1>
+<h5>See the top three topics that an author focuses on, according to an LDA analysis of their corpus</h5>
 <select id="authors" name="authors">
 {% for author in authors %}
 <option value="{{ author.author_id }}" author="{{ author.name }}">{{ author.name }}</value>
