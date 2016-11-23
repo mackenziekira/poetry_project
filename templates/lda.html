@@ -1,49 +1,23 @@
 {% extends 'base.html' %}
+
 {% block title %}Poets{% endblock %}
+
 {% block content %}
 
 <h1>Latent Dirichlet Allocation</h1>
 <h5>See the top three topics that an author focuses on, according to an LDA analysis of their corpus</h5>
+
 <select id="authors" name="authors">
-{% for author in authors %}
-<option value="{{ author.author_id }}" author="{{ author.name }}">{{ author.name }}</value>
-{% endfor %}
+  {% for author in authors %}
+  <option value="{{ author.author_id }}" author="{{ author.name }}">{{ author.name }}</option>
+  {% endfor %}
 </select>
 
 <div id="tables" class="container">
-
 </div>
 
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript">
-
-function renderTable(data) {
-    console.log(data);
-    
-    $.each(data, function(k, v) {
-        $('#' + counter).append('<tr class=' + counter + '></tr>');
-        $.each(v, function(i, j) {
-            $('tr.' + counter + ':last').append('<td>' + j + '</td>');
-        });
-});
-    counter++;
-    
-}
-
-function fetchInfo(e) {
-    var author = $('#authors :selected').text();
-    $('#tables').append('<table class="table table-striped"><thead><tr><th>' + author + '</th></tr></thead><tbody id=' + counter + '></tbody></table>');
-    var id = this.value;
-    var url = '/author_lda/' + id + '.json';
-    $.get(url, renderTable);
-}
-
-$('#authors').on('change', fetchInfo);
-var counter = 0;
-
-</script>
-
-
+<script type="text/javascript" src="static/js/lda.js"></script>
 {% endblock %}

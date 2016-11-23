@@ -4,44 +4,20 @@
 
 
 <select id="subjects" name="subject">
-{% for subject in subjects %}
-<option value="{{ subject.subject_id }}">{{ subject.subject_name }}</value>
-{% endfor %}
-</select>
+  {% for subject in subjects %}
+  <option value="{{ subject.subject_id }}">{{ subject.subject_name }}</value>
+    {% endfor %}
+  </select>
 
-<div class="container">
-  <table class="table table-striped">
-    <tbody>
-    </tbody>
-  </table>
-</div>
+  <div class="container">
+    <table class="table table-striped">
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 
-{% endblock %}
+  {% endblock %}
 
-{% block script %}
-<script type="text/javascript">
-
-function renderTable(data) {
-    $('tbody').append('<tr id=' + counter + '>');
-    $.each(data, function(key, value) {
-        $('#' + counter).append('<td>' + value.count + ': ' + value.word + '</td>');
-});
-    $('tbody').append('</tr>');
-    counter++;
-    
-}
-
-function fetchInfo(e) {
-    var id = this.value;
-    console.log(id)
-    var url = '/subject_info/' + id + '.json';
-    $.get(url, renderTable);
-}
-
-$('#subjects').on('change', fetchInfo);
-var counter = 0;
-
-</script>
-
-
-{% endblock %}
+  {% block script %}
+  <script type="text/javascript" src="static/js/subjects.js"></script>
+  {% endblock %}

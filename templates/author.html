@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
+
 {% block title %}{{ author.name }}{% endblock %}
 
 {% block content %}
+
 <h3>{{ author.name }}</h3>
-<ul>
+
+
 <h5>Poems: </h5>
 {% for poem in author.poems %}
 <div><a href="/poem/{{ poem.poem_id }}">{{ poem.title }}</a></div>
 {% endfor %}
+
 <br/>
 
-
 <ul>
-{% for word in author.top_words %}
-    <li><a href="/?term={{ word[0] }}">{{ word[0] }}</a>: {{ word[2] }}</li>
-{% endfor %}
+  {% for word in author.top_words %}
+  <li><a href="/?term={{ word[0] }}">{{ word[0] }}</a>: {{ word[2] }}</li>
+  {% endfor %}
 </ul>
 
 {% endblock %}

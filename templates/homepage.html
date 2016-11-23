@@ -1,70 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Poetry Project{% endblock %}
 {% block content %}
-<style>
-  .highlight {
-    background: yellow;
-  }
-  div.poembody {
-    white-space: pre-wrap;
-    background: #e7e7e7;
-}
-  </style>
 
-    <form action="/">
-        <input name='term'>
-    </form>
-    {% if poems %}
-        {% for poem in poems %}
-        <div class="container">
-            <div class="headline" id="{{ poem.poem_id }}" subjects="{{ poem.subjects }}" affiliation="{{ poem.author.affiliation }}" region="{{ poem.author.region }}">
-                {% for headline in headlines %}
-                    {% if headline.poem_id == poem.poem_id %} 
-                        {{ headline.headline | safe }}
-                    {% endif %} 
-                {% endfor %}</div>
-            <div id="poem_{{ poem.poem_id }}" class="poembody" hidden>
-                <h4>{{ poem.title }}</h4>
-                <h5>{{ poem.author }}</h5>
-                <p>{{ poem.body }}</p>
-            </div>
-        </div>
-        
+<form action="/">
+  <input name='term'>
+</form>
+{% if poems %}
+{% for poem in poems %}
+<div class="container">
+  <div class="headline" id="{{ poem.poem_id }}" subjects="{{ poem.subjects }}" affiliation="{{ poem.author.affiliation }}" region="{{ poem.author.region }}">
+    {% for headline in headlines %}
+    {% if headline.poem_id == poem.poem_id %} 
+    {{ headline.headline | safe }}
+    {% endif %} 
+    {% endfor %}</div>
+    <div id="poem_{{ poem.poem_id }}" class="poembody" hidden>
+      <h4>{{ poem.title }}</h4>
+      <h5>{{ poem.author }}</h5>
+      <p>{{ poem.body }}</p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
 
-
-        {% endfor %}
-    {% endif %}
-
-    {% if subjects %}
-    <ul id="subject-list">
-        {% for subject in subjects %}
-            <li id="{{ subject[0] }}" count="{{ subject[1] }}">{{ subject[0] }}: {{ subject[1] }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+{% if subjects %}
+<ul id="subject-list">
+  {% for subject in subjects %}
+  <li id="{{ subject[0] }}" count="{{ subject[1] }}">{{ subject[0] }}: {{ subject[1] }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock %}
+
 {% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.4.1/jquery.mark.es6.js"></script>
-<script type="text/javascript">
-
-
-function toggleText(evt) {
-    var id = 'poem_' + this.id;
-    $("#" + id).toggle();
-}
-
-function highlightText(evt) {
-    var id = this.id;
-    var subj = "div[subjects*='"+ id +"']";
-    $(subj).toggleClass("highlight");
-}
-
-
-$('.headline').on('click', toggleText)
-$('li').on('click', highlightText)
-$('.poembody').mark('divine')
-</script>
+<script src="static/js/homepage.js"></script>
 {% endblock %}
 
 
