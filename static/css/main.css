@@ -1,3 +1,10 @@
+body {
+    color: #777;
+}
+
+b {
+    color: black;
+}
 
 .highlight {
   background: yellow;
@@ -10,5 +17,9 @@ div.poembody {
 
 div.poembody {
   white-space: pre-wrap
+}
+
+mark {
+    background: #ffff00;
 }
 

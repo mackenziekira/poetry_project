@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Poets{% endblock %}
 {% block content %}
-
-
+<h1>Subjects</h1>
+<h5>See the top terms used in poems tagged with a particular subject</h5>
 <select id="subjects" name="subject">
   {% for subject in subjects %}
   <option value="{{ subject.subject_id }}">{{ subject.subject_name }}</value>
     {% endfor %}
   </select>
+  <br/>
+<br/>
+
 
   <div class="container">
     <table class="table table-striped">

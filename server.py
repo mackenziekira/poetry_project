@@ -15,9 +15,7 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "ABC"
 
-# Normally, if you use an undefined variable in Jinja2, it fails
-# silently. This is horrible. Fix this so that, instead, it raises an
-# error.
+# Raises an error if you use undefined Jinja variable.
 app.jinja_env.undefined = StrictUndefined
 
 
@@ -31,7 +29,7 @@ def index():
     # term = '\'' + term +  '\''
 
     if not term:
-        return render_template('homepage.html', poems=[], headlines=[], subjects=[])
+        return render_template('homepage.html', poems=[], headlines=[], subjects=[], term='')
 
     poems = Poem.query.options(db.joinedload('subjects')).filter(Poem.tsv.match(term)).all()
 
@@ -50,7 +48,7 @@ def index():
     #     subjects.update
     
 
-    return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects)
+    return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects, term=term)
 
 
 @app.route('/authors')
@@ -139,15 +137,15 @@ def author_lda(author_id):
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
-    app.debug = True
-    app.config['SQLALCHEMY_ECHO'] = True
+    # app.debug = True
+    # app.config['SQLALCHEMY_ECHO'] = True
 
 
     app.jinja_env.auto_reload = True
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run('0.0.0.0')
     
