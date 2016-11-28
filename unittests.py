@@ -50,9 +50,9 @@ class FlaskTestsDatabase(unittest.TestCase):
 
     def test_subjects_page(self):
         """Test subjects page."""
-
+        
         result = self.client.get("/subjects")
-        self.assertIn("See the top terms used in poems tagged with a particular subject", result.data)
+        self.assertIn("delight", result.data)
 
     def test_authors_page(self):
         """Test authors page."""
@@ -60,6 +60,11 @@ class FlaskTestsDatabase(unittest.TestCase):
         result = self.client.get("/authors")
         self.assertIn("Nellie Bly", result.data)
 
+    def test_lda_page(self):
+        """Test lda page."""
+
+        result = self.client.get("/lda")
+        self.assertIn("Studs Terkel", result.data)
 
 
 

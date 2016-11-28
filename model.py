@@ -159,7 +159,7 @@ def example_data():
     # bb = PoemSubject(poem_id=2, subject_id=1)
     # cb = PoemSubject(poem_id=1, subject_id=1)
 
-    db.session.add_all([huck, nellie, studs, ontom, notesfrommexico])
+    db.session.add_all([huck, nellie, studs, ontom, notesfrommexico, horror, delight])
     db.session.commit()
 
 if __name__ == "__main__":
