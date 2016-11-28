@@ -122,14 +122,45 @@ class PoemSubject(db.Model):
 
 
 #############################################################################
+
 # Helper functions
 
-def connect_to_db(app):
+def connect_to_db(app, db_uri="postgresql:///poetry"):
     """Connect the database to Flask application"""
 
-    app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql:///poetry'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     db.app = app
     db.init_app(app)
+
+def example_data():
+    """Create some sample data for the test database"""
+
+    # In case this is run more than once, empty out existing data
+    Subject.query.delete()
+    Author.query.delete()
+    Poem.query.delete()
+    PoemSubject.query.delete()
+
+    # Add sample authors, poems, and subjects
+    huck = Author(name='Huck Finn')
+    nellie = Author(name='Nellie Bly')
+    studs = Author(name='Studs Terkel')
+    db.session.flush()
+
+    ontom = Poem(title='on tom sawyer', body='i never needed tom anyway', poem_url="", author_id=1)
+    notesfrommexico = Poem(title='notes from mexico', body='too bad about the wall', poem_url="", author_id=2)
+    db.session.flush()
+
+    horror = Subject(subject_name='horror')
+    delight = Subject(subject_name='delight')
+    db.session.flush()
+
+    # hp = PoemSubject(poem_id=1, subject_id=2)
+    # bb = PoemSubject(poem_id=2, subject_id=1)
+    # cb = PoemSubject(poem_id=1, subject_id=1)
+
+    db.session.add_all([huck, nellie, studs, ontom, notesfrommexico])
+    db.session.commit()
 
 if __name__ == "__main__":
     from server import app

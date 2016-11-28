@@ -3,7 +3,7 @@
 {% block title %}Poets{% endblock %}
 
 {% block content %}
-
+<div class="container col-xs-10 col-xs-offset-1">
 <h1>Latent Dirichlet Allocation</h1>
 <h5>See the top three topics that an author focuses on, according to an LDA analysis of their corpus</h5>
 
@@ -12,6 +12,7 @@
   <option value="{{ author.author_id }}" author="{{ author.name }}">{{ author.name }}</option>
   {% endfor %}
 </select>
+</dib>
 
 <div id="tables" class="container">
 </div>

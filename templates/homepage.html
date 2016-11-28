@@ -2,42 +2,51 @@
 {% block title %}Poetry Project{% endblock %}
 {% block content %}
 
-<div class="container col-xs-8 col-xs-offset-2">
+<div class="container col-xs-6 col-xs-offset-3">
   <form action="/">
     <input name='term' class="form-control" placeholder="Search for a word...">
   </form>
-  <br/>
+  
 </div>
 
-<div class="container col-xs-8 col-xs-offset-2">
+
+
+
 {% if poems %}
-{% for poem in poems %}
+<div class="container col-xs-8 col-xs-offset-2">
+  {% for poem in poems %}
 
   <div class="headline" id="{{ poem.poem_id }}" subjects="{{ poem.subjects }}" affiliation="{{ poem.author.affiliation }}" region="{{ poem.author.region }}">
     {% for headline in headlines %}
     {% if headline.poem_id == poem.poem_id %} 
     {{ headline.headline | safe }}
     {% endif %} 
-    {% endfor %}</div>
-    <div id="poem_{{ poem.poem_id }}" class="poembody" hidden>
-      <h4>{{ poem.title }}</h4>
-      <h5>{{ poem.author }}</h5>
-      <p>{{ poem.body }}</p>
-    </div>
+    {% endfor %}
   </div>
-</div>
-<div class="container col-xs-8 col-xs-offset-2" id="{{ term }}" term="search-term">
+  <div id="poem_{{ poem.poem_id }}" class="poembody" hidden>
+    <h4>{{ poem.title }}</h4>
+    <h5>{{ poem.author }}</h5>
+    <p>{{ poem.body }}</p>
+  </div>
   {% endfor %}
-  {% endif %}
-  <br/>
-  {% if subjects %}
+</div>
+
+{% endif %}
+
+
+
+
+
+{% if subjects %}
+<div class="container col-xs-8 col-xs-offset-2" id="{{ term }}" term="search-term">
   <ul id="subject-list">
     {% for subject in subjects %}
     <li id="{{ subject[0] }}" count="{{ subject[1] }}">{{ subject[0] }}: {{ subject[1] }}</li>
     {% endfor %}
   </ul>
-  {% endif %}
 </div>
+{% endif %}
+
 
 {% endblock %}
 
