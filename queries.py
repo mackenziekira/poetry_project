@@ -5,23 +5,28 @@ from sqlalchemy import func
 def get_headlines(term):
     """get relevant lines that contain the search term"""
 
-    qry = 'SELECT *, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
+    qry = 'SELECT poem_id, ts_headline(body, q) AS headline FROM poems, to_tsquery(\'{}\') q WHERE q @@ tsv'.format(term)
     cursor = db.session.execute(qry)
     headlines = cursor.fetchall()
     db.session.commit()
-    return headlines
 
-def get_subjects(headlines):
+    headline_dict = {}
+    for poem in headlines:
+        headline_dict[poem.poem_id] = poem.headline
+
+    return headline_dict
+
+def get_subjects(poems):
     """get relevant subjects associated with poems returned from search term"""
 
     poem_ids = [0]
 
-    for poem in headlines:
-        poem_ids.append(poem[0])
+    for poem in poems:
+        poem_ids.append(poem.poem_id)
 
     poem_ids = tuple(poem_ids)
 
-    qry = "select s.subject_name, count(s.subject_name) from poems_subjects as ps join subjects as s on ps.subject_id = s.subject_id where ps.poem_id in {} group by s.subject_name order by count(s.subject_name) desc limit 5".format(poem_ids)
+    qry = "SELECT s.subject_name, COUNT(s.subject_name) FROM poems_subjects AS ps JOIN subjects AS s ON ps.subject_id = s.subject_id WHERE ps.poem_id IN {} GROUP BY s.subject_name ORDER BY count(s.subject_name) DESC LIMIT 5".format(poem_ids)
 
     cursor = db.session.execute(qry)
 

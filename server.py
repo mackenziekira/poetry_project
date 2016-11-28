@@ -40,7 +40,8 @@ def index():
 
     headlines = queries.get_headlines(term)
 
-    subjects = queries.get_subjects(headlines)
+    subjects = queries.get_subjects(poems)
+
 
     # subjects = {}
 
