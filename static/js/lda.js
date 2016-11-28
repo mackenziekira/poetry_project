@@ -15,8 +15,8 @@ function renderTable(data) {
 
 function fetchInfo(e) {
     var author = $('#authors :selected').text();
-    $('#tables').append('<table class="table table-striped"><thead><tr><h4>' + author + '</h4></tr></thead><tbody id=' + counter + '></tbody></table>');
     var id = this.value;
+    $('#tables').append('<table class="table table-striped"><thead><tr><h4><a href="/author/' + id + '">' + author + '</a></h4></tr></thead><tbody id=' + counter + '></tbody></table>');
     var url = '/author_lda/' + id + '.json';
     $.get(url, renderTable);
 }

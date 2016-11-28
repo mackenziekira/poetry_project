@@ -1,18 +1,17 @@
 
 
 function renderTable(data) {
-    $('tbody').append('<tr id=' + counter + '>');
     $.each(data, function(key, value) {
         $('#' + counter).append('<td>' + value.count + ': ' + value.word + '</td>');
 });
-    $('tbody').append('</tr>');
     counter++;
     
 }
 
 function fetchInfo(e) {
     var id = this.value;
-    console.log(id)
+    var subject = $('#subjects :selected').text();
+    $('tbody').append('<tr id=' + counter + '><td><b>' + subject + '</b></td></tr>');
     var url = '/subject_info/' + id + '.json';
     $.get(url, renderTable);
 }

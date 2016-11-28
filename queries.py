@@ -10,13 +10,14 @@ def get_headlines(term):
     headlines = cursor.fetchall()
     db.session.commit()
 
+    # turn into dict now to avoid O(n^2) in jinja render logic on homepage
     headline_dict = {}
     for poem in headlines:
         headline_dict[poem.poem_id] = poem.headline
 
     return headline_dict
 
-def get_subjects(poems):
+def get_subject_counts(poems):
     """get relevant subjects associated with poems returned from search term"""
 
     poem_ids = [0]
@@ -26,7 +27,7 @@ def get_subjects(poems):
 
     poem_ids = tuple(poem_ids)
 
-    qry = "SELECT s.subject_name, COUNT(s.subject_name) FROM poems_subjects AS ps JOIN subjects AS s ON ps.subject_id = s.subject_id WHERE ps.poem_id IN {} GROUP BY s.subject_name ORDER BY count(s.subject_name) DESC LIMIT 5".format(poem_ids)
+    qry = "SELECT s.subject_name, COUNT(s.subject_name) FROM poems_subjects AS ps JOIN subjects AS s ON ps.subject_id = s.subject_id WHERE ps.poem_id IN {} GROUP BY s.subject_name ORDER BY COUNT(s.subject_name) DESC LIMIT 5".format(poem_ids)
 
     cursor = db.session.execute(qry)
 

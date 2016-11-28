@@ -40,13 +40,7 @@ def index():
 
     headlines = queries.get_headlines(term)
 
-    subjects = queries.get_subjects(poems)
-
-
-    # subjects = {}
-
-    # for poem in poems:
-    #     subjects.update
+    subjects = queries.get_subject_counts(poems)
     
 
     return render_template("homepage.html", headlines=headlines, poems=poems, subjects=subjects, term=term)
