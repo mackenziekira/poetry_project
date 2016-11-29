@@ -1,5 +1,10 @@
 body {
     color: #777;
+    background-image: url('../crossword.png');
+}
+
+div.kmeans {
+    background-color: white;
 }
 
 b {
