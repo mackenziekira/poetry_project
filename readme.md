@@ -7,7 +7,7 @@
 <div>
 <h2>Contents:</h2>
 <ul>
-<li>[Features](#features)</li>
+<li><a href="#features">Features</a></li>
 <li>Setup</li>
 </ul>
 </div>
