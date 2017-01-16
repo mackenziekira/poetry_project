@@ -2,8 +2,8 @@
 
 ![](http://g.recordit.co/0ro9r6KQ2X.gif)
 
-<p>The Poetry Project allows people to explore how masters of language use words. The main page allows users to search for a particular word and see all instances of that term across the text corpus. This search is quick because it implements Postgres' full text search capability using a GIN index. Users can also explore by author and subject—the author page sorts authors by breadth of vocabulary, and the subject page lets users dynamically build a table to see the top terms used per subject. Lastly, users can see the results of a K-Means analysis of the corpus, plus compare Latent Dirichlet Allocation topic analyses on an author-by-author basis. These forms of unsupervised learning required transforming each poem into a multidimensional TF-IDF vector.</p>
-
+<p>The Poetry Project allows people to explore how poets use words. The main page allows users to search for a particular word and see all instances of that term across the text corpus. This search is quick because it implements Postgres' full text search capability using a GIN index. Users can also explore by author and subject—the author page sorts authors by breadth of vocabulary, and the subject page lets users dynamically build a table to see the top terms used per subject. Lastly, users can explore the results of common topic extraction methods to see how a computer models topics: a K-Means analysis of the entire poem corpus, and a Latent Dirichlet Allocation topic analyses on an author-by-author basis. These forms of unsupervised learning required transforming each poem into a multidimensional TF-IDF vector.</p>
+<p>The project uses Python, PostgreSQL, SQLAlchemy, Flask, scikit-learn, Jinja, JavaScript, jQuery, AJAX, unittest, requests, Beautiful Soup, and Bootstrap.</p>
 <div>
 <h2>Contents:</h2>
 <ul>
