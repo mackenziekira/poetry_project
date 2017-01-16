@@ -9,11 +9,12 @@
 <ul>
 <li><a href="#features">Features</a></li>
 <li><a href="#setup">Setup</a></li>
+<li><a href="#build-process">Build Process</a></li>
 </ul>
 </div>
 
 <div>
-<h3>Features</h3>
+<h2>Features</h2>
 <h4><i>Current</i></h4>
 <ul>
 <li>Full text search using GIN index</li>
@@ -35,7 +36,7 @@
 </div>
 
 <div>
-<h3>Setup</h3>
+<h2>Setup</h2>
 <ol>
 <li><h4><i>Clone the repository</i></h4></li>
 <li><h4><i>Create a virtual environment and install all required libraries</i></h4>
@@ -44,5 +45,21 @@
 <p>At the command line, type <br/><br/><code>createdb poetry</code><br/><code>psql poetry < poetry.sql</code><br/><br/> to create and restore the database. This requires you to have PostgreSQL on your machine.</p></li>
 <li><h4><i>Run the server</i></h4>
 <p>Run <br/><br/><code>python server.py</code><br/><br/>and you should be up and running! Go to localhost in your browser and check it out.</p></li>
+</ol>
+
+</div>
+
+<div>
+<h2>Build Process</h2>
+<ul>
+<li><h4><i>Scraping Poems</i></h4>
+</li>
+<li><h4><i>Seeding the Database</i></h4>
+</li>
+<li><h4><i>Creating a Full Text Search</i></h4>
+</li>
+<li><h4><i>Run the server</i></h4>
+<p>Run <br/><br/><code>python server.py</code><br/><br/>and you should be up and running! Go to localhost in your browser and check it out.</p></li>
+</ul>
 
 </div>
