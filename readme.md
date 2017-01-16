@@ -8,7 +8,7 @@
 <h2>Contents:</h2>
 <ul>
 <li><a href="#features">Features</a></li>
-<li>Setup</li>
+<li><a href="#setup">Setup</a></li>
 </ul>
 </div>
 
