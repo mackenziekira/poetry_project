@@ -17,3 +17,4 @@ function highlightText(evt) {
 $('.headline').on('click', toggleText)
 $('li').on('click', highlightText)
 $('.poembody').mark($('div[term]').attr('id'))
+

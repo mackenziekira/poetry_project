@@ -43,6 +43,6 @@
 <li><h4><i>Create the database</i></h4>
 <p>At the command line, type <br/><br/><code>createdb poetry</code><br/><code>psql poetry < poetry.sql</code><br/><br/> to create and restore the database. This requires you to have PostgreSQL on your machine.</p></li>
 <li><h4><i>Run the server</i></h4>
-<p>Run <br/><br/><code>python server.py</code><br/>and you should be up and running! Go to localhost in your browser and check it out.</p></li>
+<p>Run <br/><br/><code>python server.py</code><br/><br/>and you should be up and running! Go to localhost in your browser and check it out.</p></li>
 
 </div>
