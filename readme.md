@@ -13,7 +13,7 @@
 </div>
 
 <div>
-<h3><a id="features"></a>Features</h3>
+<h3 id="features">Features</h3>
 <h4><i>Current</i></h4>
 <ul>
 <li>Full text search using GIN index</li>
