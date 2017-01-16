@@ -7,7 +7,7 @@
 <div>
 <h2>Contents:</h2>
 <ul>
-<li>Features</li>
+<li>[Features](#Features)</li>
 <li>Setup</li>
 </ul>
 </div>
@@ -41,6 +41,8 @@
 <li><h4><i>Create a virtual environment and install all required libraries</i></h4>
 <p>Inside the repo that you just cloned, create a virtual environment:<br/><br/><code>virtualenv env</code><br/><br/>enter the virtual env:<br/><br/><code>source env/bin/activate</code><br/><br/>and install all required libraries:<br/><br/><code>pip install -r requirements.txt</code><br/><br/> Note best practices and make sure you add your env folder to your .gitignore file (<code>echo '/env' >> .gitignore</code>).</p></li>
 <li><h4><i>Create the database</i></h4>
-<p>At the command line, type <br/><br/><code>createdb poetry</code><br/><code>psql poetry < poetry.sql</code><br/><br/> to create and restore the database.</p></li>
+<p>At the command line, type <br/><br/><code>createdb poetry</code><br/><code>psql poetry < poetry.sql</code><br/><br/> to create and restore the database. This requires you to have PostgreSQL on your machine.</p></li>
+<li><h4><i>Run the server</i></h4>
+<p>Run <br/><br/><code>python server.py</code><br/>and you should be up and running!</p></li>
 
 </div>
