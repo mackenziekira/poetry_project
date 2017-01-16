@@ -15,6 +15,7 @@ function highlightText(evt) {
 
 function checkNoSpace(evt) {
   var textEntered = this.value;
+  console.log(textEntered);
   if (textEntered.indexOf(' ') > -1) {
     $('#error').html('Search word must be one word.');
   }
@@ -23,9 +24,9 @@ function checkNoSpace(evt) {
   }
 }
 
-
+$('input').on('keyup', checkNoSpace);
 $('.headline').on('click', toggleText)
 $('li').on('click', highlightText)
 $('.poembody').mark($('div[term]').attr('id'))
-$('input').on('keyup', checkNoSpace);
+
 
