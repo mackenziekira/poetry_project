@@ -40,6 +40,6 @@
 <h4><i>Create a virtual environment and install all required libraries</i></h4>
 <p>Inside the repo that you just cloned, create a virtual environment:<br/><br/><code>virtualenv env</code><br/><br/>enter the virtual env:<br/><br/><code>source env/bin/activate</code><br/><br/>and install all required libraries:<br/><br/><code>pip install -r requirements.txt</code><br/><br/> Note best practices and make sure you add your env folder to your .gitignore file (<code>echo '/env' >> .gitignore</code>).</p>
 <h4><i>Create the database</i></h4>
-<p>At the command line, type <code>createdb poetry</code> to create an empty database.</p>
+<p>At the command line, type <code>psql poetry < poetry.sql</code> to create the populated database.</p>
 
 </div>
