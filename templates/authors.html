@@ -3,7 +3,7 @@
 {% block title %}Poets{% endblock %}
 
 {% block content %}
-<h2>Unique words used: Author</h2>
+<h5>All authors sorted by number of unique words used.</h5>
 <ul>
   {% for author in authors %}
   <li>{{ author.word_count }}: <a href="/author/{{ author.author_id }}">{{ author.name }}</a></li>
