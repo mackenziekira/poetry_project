@@ -37,9 +37,9 @@
 <div>
 <h3>Setup</h3>
 <h4><i>Clone the repository</i></h4>
-<h4><i>Create a virtual environment</i></h4>
-<p>Navigate into the repo that you just cloned and at the terminal prompt enter <code>virtualenv env</code> then enter the virtual env you just created with the command <code>source env/bin/activate</code>. Note best practices and make sure you add your env folder to your .gitignore file (<code>echo '/env' >> .gitignore</code>).</p>
+<h4><i>Create a virtual environment and install all required libraries</i></h4>
+<p>Navigate into the repo that you just cloned and at the terminal prompt enter <code>virtualenv env</code> then enter the virtual env you just created with the command <code>source env/bin/activate</code>. Note best practices and make sure you add your env folder to your .gitignore file (<code>echo '/env' >> .gitignore</code>). To install all required libraries, run <code>pip install -r requirements.txt</code></p>
 <h4><i>Create the database</i></h4>
-<p>At the command line, type `createdb poetry` to create an empty database.</p>
+<p>At the command line, type <code>createdb poetry</code> to create an empty database.</p>
 
 </div>
