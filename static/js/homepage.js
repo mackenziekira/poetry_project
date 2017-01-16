@@ -15,7 +15,6 @@ function highlightText(evt) {
 
 function checkNoSpace(evt) {
   var textEntered = this.value;
-  console.log(textEntered);
   if (textEntered.indexOf(' ') > -1) {
     $('#error').html('Search word must be one word.');
   }
