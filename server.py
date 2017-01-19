@@ -4,6 +4,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from werkzeug.contrib.cache import SimpleCache
 from lda import perform_lda
 import queries
+import os
 from model import connect_to_db, db 
 from model import Poem, Author, Subject
 
