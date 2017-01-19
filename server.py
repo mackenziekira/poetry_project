@@ -135,6 +135,8 @@ if __name__ == "__main__":
     # app.debug = True
     # app.config['SQLALCHEMY_ECHO'] = True
 
+    PORT = int(os.environ.get("PORT", 5000))
+
 
     app.jinja_env.auto_reload = True
     connect_to_db(app)
@@ -142,5 +144,5 @@ if __name__ == "__main__":
     # Use the DebugToolbar
     # DebugToolbarExtension(app)
 
-    app.run('0.0.0.0')
+    app.run(host='0.0.0.0', port=PORT)
     
