@@ -3,7 +3,7 @@
 {% block title %}{{ author.name }}{% endblock %}
 
 {% block content %}
-
+<div class="container col-xs-10 col-xs-offset-1">
 <h3>{{ author.name }}</h3>
 
 
@@ -19,6 +19,7 @@
   <li><a href="/?term={{ word[0] }}">{{ word[0] }}</a>: {{ word[2] }}</li>
   {% endfor %}
 </ul>
+</div>
 
 {% endblock %}
 
