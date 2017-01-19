@@ -84,6 +84,13 @@ def explore_kmeans():
 
     return render_template('kmeans.html')
 
+
+@app.route('/about')
+def about():
+    """returns about page"""
+
+    return render_template('about.html')
+
 ##########################################################################################################
 
 # unique id routes
