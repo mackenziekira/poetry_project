@@ -20,7 +20,7 @@ Deployed on Heroku! Check it out: <a href="https://poetryproject.herokuapp.com">
 <h4><i>Current</i></h4>
 <ul>
 <li>Full text search using GIN index</li>
-<li>Dynamically generate table of top words used per subject using AJAX calls</li>
+<li>Dynamically generate table of top words used per subject using AJAX calls and jQuery</li>
 <li>See author list sorted by breadth of vocabulary</li>
 <li>Caching of sorted author list</li>
 <li>KMeans analysis of entire corpus</li>
@@ -60,8 +60,5 @@ Deployed on Heroku! Check it out: <a href="https://poetryproject.herokuapp.com">
 </li>
 <li><h4><i>Creating a Full Text Search</i></h4>
 </li>
-<li><h4><i>Run the server</i></h4>
-<p>Run <br/><br/><code>python server.py</code><br/><br/>and you should be up and running! Go to localhost in your browser and check it out.</p></li>
-</ul>
 
 </div>
