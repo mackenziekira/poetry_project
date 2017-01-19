@@ -13,9 +13,6 @@ from model import Poem, Author, Subject
 cache = SimpleCache()
 app = Flask(__name__)
 
-# Required to use Flask sessions and the debug toolbar
-# app.secret_key = "ABC"
-
 # Raises an error if you use undefined Jinja variable.
 app.jinja_env.undefined = StrictUndefined
 
@@ -31,7 +28,7 @@ def index():
         return render_template('homepage.html', poems=[], headlines=[], subjects=[], term='')
 
     isalpha = term.isalpha()
-    if not isalpha:
+    if isalpha == False:
         flash('Word must be all alpha characters.')
         return redirect('/')
 
@@ -140,6 +137,10 @@ if __name__ == "__main__":
 
     PORT = int(os.environ.get("PORT", 5000))
     DEBUG = "NO_DEBUG" not in os.environ
+    SECRET_KEY = os.environ.get("FLASK_SECRET_KEY", "asdf9k$")
+
+    # Required to use Flask sessions and the debug toolbar
+    app.secret_key = SECRET_KEY
 
 
     app.jinja_env.auto_reload = True

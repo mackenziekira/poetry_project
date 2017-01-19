@@ -32,4 +32,9 @@ div.container {
     margin-bottom: 2em;
 }
 
+.flashes {
+  text-align: center;
+  color: red;
+}
+
 
