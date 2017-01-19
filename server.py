@@ -27,13 +27,15 @@ def index():
 
 
     term = request.args.get('term')
-    # term = '\'' + term +  '\''
-
     if not term:
         return render_template('homepage.html', poems=[], headlines=[], subjects=[], term='')
 
-    poems = Poem.query.options(db.joinedload('subjects')).filter(Poem.tsv.match(term)).all()
+    isalpha = term.isalpha()
+    if not isalpha:
+        flash('Word must be all alpha characters.')
+        return redirect('/')
 
+    poems = Poem.query.options(db.joinedload('subjects')).filter(Poem.tsv.match(term)).all()
     if not poems:
         flash('Word not found. Try another!')
         return redirect('/')
