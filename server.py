@@ -13,7 +13,7 @@ cache = SimpleCache()
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "ABC"
+# app.secret_key = "ABC"
 
 # Raises an error if you use undefined Jinja variable.
 app.jinja_env.undefined = StrictUndefined
@@ -136,13 +136,14 @@ if __name__ == "__main__":
     # app.config['SQLALCHEMY_ECHO'] = True
 
     PORT = int(os.environ.get("PORT", 5000))
+    DEBUG = "NO_DEBUG" not in os.environ
 
 
     app.jinja_env.auto_reload = True
-    connect_to_db(app)
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
 
     # Use the DebugToolbar
     # DebugToolbarExtension(app)
 
-    app.run(host='0.0.0.0', port=PORT)
+    app.run(host='0.0.0.0', port=PORT, debug=DEBUG)
     
