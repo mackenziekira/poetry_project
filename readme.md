@@ -1,6 +1,6 @@
 <h1>The Poetry Project</h1>
 
-Deployed on Heroku! Check it out: <a href="https://poetryproject.herokuapp.com">https://poetryproject.herokuapp.com</a>
+Deployed on Heroku! Check it out: <a href="https://poetryproject.herokuapp.com" target="blank">https://poetryproject.herokuapp.com</a>
 
 ![](http://g.recordit.co/0ro9r6KQ2X.gif)
 
