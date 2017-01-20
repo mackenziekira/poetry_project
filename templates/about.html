@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}About{% endblock %}
 {% block content %}
-<div class="container col-xs-10 col-xs-offset-1">
+<div class="container col-xs-6 col-xs-offset-3">
 <h1>About this project</h1>
-<p>Thanks for stopping by! I created this project with the idea in mind of a supplement to a dictionary or etymology search. Sometimes it's more instructive to see a word in the wild when you're not sure what it means or how it's used. Granted, there's still a ways to go—the database is currently only seeded with a few over a thousand poems—but I hope you'll enjoy poking around, and get in touch if you have any comments, feedback, ideas, dreams...<a href="https://twitter.com/mackenziekirad">@mackenziekirad</a></p>
+<p>Thanks for stopping by! I created this project with the idea in mind of a supplement to a dictionary or etymology search. Sometimes it's more instructive to see a word in the wild when you're not sure what it means or how it's used. Granted, there's still a ways to go—the database is currently seeded with only a few over a thousand poems—but I hope you'll enjoy poking around, and get in touch if you have any comments, feedback, ideas, dreams...<a href="https://twitter.com/mackenziekirad">@mackenziekirad</a>.</p>
 
 <p>On the main search page, you can click on the lines or subjects your search returns to see more info, and on the LDA analysis page, each topic is open to your interpretation based on the grouping of words. Those results are created by a common topic modeling algorithm for textual analysis, Latent Dirichlet Allocation. The algorithm tends to shine given more direct, subject-oriented texts (like newspaper articles or emails), but I was curious to implement it here to see what a computer 'thinks' an author's poems are about.</p>
 
 <p>For a truly awesome poetry project, check <a href="http://www.onbeing.org/project/poetry-radio-project/2140">this</a> out.</p>
 
 </div>
+
+{% endblock %}
 
 
 {% block script %}
